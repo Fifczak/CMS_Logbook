@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.myapplication.StartFragment"
+        android:label="CMS logbook"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_deviceListFragment"
+            app:destination="@id/deviceListFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_cameraActivity"
+            app:destination="@id/cameraActivity" />
+        <action
+            android:id="@+id/action_startFragment_to_deviceMenuFragment"
+            app:destination="@id/deviceMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deviceListFragment"
+        android:name="com.example.myapplication.DeviceListFragment"
+        android:label="Devices list"
+        tools:layout="@layout/fragment_device_list" >
+        <action
+            android:id="@+id/action_deviceListFragment_to_deviceMenuFragment"
+            app:destination="@id/deviceMenuFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/cameraActivity"
+        android:name="com.example.myapplication.CameraActivity"
+        android:label="fragment_qr_scanner"
+        tools:layout="@layout/activiti_camera" />
+    <fragment
+        android:id="@+id/deviceMenuFragment"
+        android:name="com.example.myapplication.DeviceMenuFragment"
+        android:label="Device menu"
+        tools:layout="@layout/fragment_device_menu" >
+        <argument
+            android:name="deviceId"
+            app:argType="string" />
+        <argument
+            android:name="deviceName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_deviceMenuFragment_to_remarksFragment"
+            app:destination="@id/remarksFragment" />
+        <action
+            android:id="@+id/action_deviceMenuFragment_to_repairHistoryFragment"
+            app:destination="@id/repairHistoryFragment" />
+        <action
+            android:id="@+id/action_deviceMenuFragment_to_addWorkParametersFragment"
+            app:destination="@id/addWorkParametersFragment" />
+        <action
+            android:id="@+id/action_deviceMenuFragment_to_deviceManualFragment"
+            app:destination="@id/deviceManualFragment" />
+        <action
+            android:id="@+id/action_deviceMenuFragment_to_note"
+            app:destination="@id/note" />
+    </fragment>
+    <fragment
+        android:id="@+id/remarksFragment"
+        android:name="com.example.myapplication.RemarksFragment"
+        android:label="Device remarks"
+        tools:layout="@layout/fragment_remarks">
+        <argument
+            android:name="deviceId"
+            app:argType="string" />
+        <argument
+            android:name="deviceName"
+            app:argType="string" />
+        </fragment>
+    <fragment
+        android:id="@+id/repairHistoryFragment"
+        android:name="com.example.myapplication.RepairHistoryFragment"
+        android:label="Repair history"
+        tools:layout="@layout/fragment_repair_history" />
+    <fragment
+        android:id="@+id/addWorkParametersFragment"
+        android:name="com.example.myapplication.AddWorkParametersFragment"
+        android:label="Add parameter value"
+        tools:layout="@layout/fragment_add_work_parameters" />
+    <fragment
+        android:id="@+id/deviceManualFragment"
+        android:name="com.example.myapplication.DeviceManualFragment"
+        android:label="Device manual"
+        tools:layout="@layout/fragment_device_manual" />
+    <fragment
+        android:id="@+id/note"
+        android:name="com.example.myapplication.Note"
+        android:label="Note"
+        tools:layout="@layout/fragment_note" />
+</navigation>
