@@ -8,40 +8,43 @@
 
     <Button
         android:id="@+id/button_qr_code"
-        android:layout_width="320dp"
-        android:layout_height="160dp"
-        android:layout_marginBottom="308dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
         android:background="#FFFFFF"
         android:text="@string/scan_qr_code"
         android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_select_machine"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_weight="1" />
 
     <Button
         android:id="@+id/button_select_machine"
-        android:layout_width="320dp"
-        android:layout_height="160dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
         android:background="#FFFFFF"
         android:text="@string/select_machine"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/button_qr_code"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.651" />
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_weight="1" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginBottom="40dp"
         android:src="@drawable/cms_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_qr_code" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

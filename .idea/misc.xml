@@ -5,6 +5,16 @@
       <map>
         <entry key="../../../Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.1" />
         <entry key="../../../Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_2.xml" value="0.1" />
+        <entry key="app-cms-workbook/src/main/res/drawable/border.xml" value="0.245" />
+        <entry key="app-cms-workbook/src/main/res/drawable/gradient_background.xml" value="0.245" />
+        <entry key="app-cms-workbook/src/main/res/layout/activiti_camera.xml" value="0.29243266353142366" />
+        <entry key="app-cms-workbook/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app-cms-workbook/src/main/res/layout/content_main.xml" value="0.125" />
+        <entry key="app-cms-workbook/src/main/res/layout/fragment_add_work_parameters.xml" value="0.29243266353142366" />
+        <entry key="app-cms-workbook/src/main/res/layout/fragment_repair_history.xml" value="0.29243266353142366" />
+        <entry key="app-cms-workbook/src/main/res/layout/fragment_start.xml" value="0.14920906370243694" />
+        <entry key="app-cms-workbook/src/main/res/layout/item_device.xml" value="0.1393643031784841" />
+        <entry key="app-cms-workbook/src/main/res/menu/menu_main.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.19" />
         <entry key="app/src/main/res/layout/activiti_camera.xml" value="0.1" />
