@@ -6,7 +6,7 @@
     <string name="device_list_fragment_label">Device List</string>
     <string name="qr_scanner_fragment_label">QR Code Scanner</string>
     <string name="scan_qr_code">Scan QR Code</string>
-    <string name="select_machine">Select a machine from the list</string>
+    <string name="select_machine">Machine list</string>
     <string name="previous">Previous</string>
     <string name="cbm_string_device_name">Device name
         :</string>

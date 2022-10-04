@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,10 +14,10 @@ import android.util.Size;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraX;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.navigation.ui.AppBarConfiguration;
 
-import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.QRCodeImageAnalysis.QrCodeAnalysisCallback;
 
 import java.util.concurrent.ExecutorService;
@@ -26,7 +27,6 @@ import androidx.core.content.ContextCompat;
 public class CameraActivity extends AppCompatActivity implements QrCodeAnalysisCallback {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
     public static final String QR_SCAN_RESULT = "SCAN_RESULT";
     private ExecutorService executorService;
     private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 105;
@@ -37,12 +37,12 @@ public class CameraActivity extends AppCompatActivity implements QrCodeAnalysisC
         setContentView(R.layout.activiti_camera);
         executorService = Executors.newSingleThreadExecutor();
 
-        if (ContextCompat.checkSelfPermission(this,
-                permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             startCamera();
         } else {
             requestPermissions(new String[]{permission.CAMERA}, CAMERA_PERMISSIONS_REQUEST_CODE);
         }
+
     }
 
     @Override

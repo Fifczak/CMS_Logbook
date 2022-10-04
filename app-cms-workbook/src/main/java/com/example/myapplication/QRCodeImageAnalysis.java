@@ -16,6 +16,7 @@
 
 package com.example.myapplication;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageAnalysis.Analyzer;
@@ -59,7 +60,7 @@ public class QRCodeImageAnalysis implements Analyzer {
    */
   public UseCase getUseCase() {
     final ImageAnalysis imageAnalysis = new ImageAnalysis(imageAnalysisConfig);
-    imageAnalysis.setAnalyzer(executor, this);
+    imageAnalysis.setAnalyzer(this);
     return imageAnalysis;
   }
 
@@ -74,11 +75,12 @@ public class QRCodeImageAnalysis implements Analyzer {
     final int width = image.getWidth();
     final int height = image.getHeight();
     final PlanarYUVLuminanceSource source =
-        new PlanarYUVLuminanceSource(imageBytes, width, height, 0, 0, width, height, false);
+        new PlanarYUVLuminanceSource(imageBytes, width, height, 0, 0, width, height, true);
     final BinaryBitmap zxingBinaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
+
     try {
       final Result decodedBarcode = new QRCodeReader().decode(zxingBinaryBitmap);
-      qrCodeAnalysisCallback.onQrCodeDetected(decodedBarcode.getText());
+//      qrCodeAnalysisCallback.onQrCodeDetected(decodedBarcode.getText());
     } catch (NotFoundException | ChecksumException | FormatException e) {
       Log.e(TAG, "QR Code decoding error", e);
     }
