@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_deviceMenuFragment_to_note"
             app:destination="@id/note" />
+        <action
+            android:id="@+id/action_deviceMenuFragment_to_sync"
+            app:destination="@id/sync" />
     </fragment>
     <fragment
         android:id="@+id/remarksFragment"
@@ -93,4 +96,9 @@
         android:name="com.example.myapplication.Note"
         android:label="Note"
         tools:layout="@layout/fragment_note" />
+    <fragment
+        android:id="@+id/sync"
+        android:name="com.example.myapplication.Sync"
+        android:label="Sync"
+        tools:layout="@layout/fragment_sync" />
 </navigation>

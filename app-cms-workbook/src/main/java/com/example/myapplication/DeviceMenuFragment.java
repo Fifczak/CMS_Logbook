@@ -138,7 +138,16 @@ public class DeviceMenuFragment extends Fragment {
 
             }
         });
+        binding.button9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("deviceId", mdeviceId);
+                NavHostFragment.findNavController(DeviceMenuFragment.this)
+                        .navigate(R.id.action_deviceMenuFragment_to_sync, bundle);
 
+            }
+        });
     }
 
 
