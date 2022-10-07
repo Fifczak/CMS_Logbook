@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".Sync">
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
-        android:layout_marginTop="50dp"
-        android:text="Download Struct from IM server" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="3dp"
+        android:text="Upload data"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button5"/>
 
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp"
-        android:text="Upload data" />
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/button"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="#FFFFFF"
+        android:text="Download Struct from IM server"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@id/button"/>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_below="@+id/button5"
-        android:layout_marginTop="50dp"
-        android:text="DOWNLOAD MANUALS" />
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="6dp"
+        android:background="#FFFFFF"
+        android:text="DOWNLOAD MANUALS"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button5"/>
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
