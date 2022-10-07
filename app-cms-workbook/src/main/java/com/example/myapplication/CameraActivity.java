@@ -1,94 +1,118 @@
 package com.example.myapplication;
-
-
-import android.Manifest;
-import android.Manifest.permission;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.view.TextureView;
-import android.util.DisplayMetrics;
-import android.util.Size;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.camera.core.CameraX;
+import androidx.camera.core.Camera;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.Preview;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.navigation.ui.AppBarConfiguration;
-
-import com.example.myapplication.QRCodeImageAnalysis.QrCodeAnalysisCallback;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 
-public class CameraActivity extends AppCompatActivity implements QrCodeAnalysisCallback {
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.Size;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-    private AppBarConfiguration appBarConfiguration;
+import com.google.common.util.concurrent.ListenableFuture;
+
+import java.util.concurrent.ExecutionException;
+
+public class CameraActivity extends AppCompatActivity {
+
     public static final String QR_SCAN_RESULT = "SCAN_RESULT";
-    private ExecutorService executorService;
-    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 105;
+    private static final int PERMISSION_REQUEST_CAMERA = 0;
+
+    private PreviewView previewView;
+    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
+
+    private Button qrCodeFoundButton;
+    private String qrCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activiti_camera);
-        executorService = Executors.newSingleThreadExecutor();
 
-        if (ContextCompat.checkSelfPermission(this, permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        previewView = findViewById(R.id.activity_main_previewView);
+
+        qrCodeFoundButton = findViewById(R.id.activity_main_qrCodeFoundButton);
+        qrCodeFoundButton.setVisibility(View.INVISIBLE);
+        qrCodeFoundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), qrCode, Toast.LENGTH_SHORT).show();
+                Log.i(MainActivity.class.getSimpleName(), "QR Code Found: " + qrCode);
+            }
+        });
+
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+        requestCamera();
+    }
+
+    private void requestCamera() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             startCamera();
         } else {
-            requestPermissions(new String[]{permission.CAMERA}, CAMERA_PERMISSIONS_REQUEST_CODE);
-        }
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSIONS_REQUEST_CODE) {
-            for (int result : grantResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
-                    finishNoQR();
-                } else {
-                    startCamera();
-                }
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+                ActivityCompat.requestPermissions(CameraActivity.this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
             }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-    }
-
-    @Override
-    public void onQrCodeDetected(String result) {
-        final Intent intent = new Intent();
-        intent.putExtra(QR_SCAN_RESULT, result);
-        setResult(Activity.RESULT_OK, intent);
-        finish();
     }
 
     private void startCamera() {
-        final TextureView textureView = findViewById(R.id.view_finder);
-        final QRCodePreview qrCodePreview = new QRCodePreview(
-                CameraConfigProvider.getPreviewConfig(getDisplaySize()),
-                textureView);
-        final QRCodeImageAnalysis qrCodeImageAnalysis = new QRCodeImageAnalysis(
-                CameraConfigProvider.getImageAnalysisConfig(), executorService, this);
-
-        CameraX.bindToLifecycle((LifecycleOwner) this, qrCodePreview.getUseCase(), qrCodeImageAnalysis.getUseCase());
+        cameraProviderFuture.addListener(() -> {
+            try {
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                bindCameraPreview(cameraProvider);
+            } catch (ExecutionException | InterruptedException e) {
+                Toast.makeText(this, "Error starting camera " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }, ContextCompat.getMainExecutor(this));
     }
 
-    private void finishNoQR() {
-        setResult(Activity.RESULT_CANCELED);
-        finish();
-    }
+    private void bindCameraPreview(@NonNull ProcessCameraProvider cameraProvider) {
+        previewView.setPreferredImplementationMode(PreviewView.ImplementationMode.SURFACE_VIEW);
 
-    private Size getDisplaySize() {
-        final DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return new Size(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        Preview preview = new Preview.Builder()
+                .build();
+
+        CameraSelector cameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .build();
+
+        preview.setSurfaceProvider(previewView.createSurfaceProvider());
+
+        ImageAnalysis imageAnalysis =
+                new ImageAnalysis.Builder()
+                        .setTargetResolution(new Size(1280, 720))
+                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                        .build();
+
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this), new QRCodeImageAnalyzer(new QRCodeFoundListener() {
+            @Override
+            public void onQRCodeFound(String _qrCode) {
+                qrCode = _qrCode;
+                qrCodeFoundButton.setVisibility(View.VISIBLE);
+                System.out.println(qrCode);
+            }
+
+            @Override
+            public void qrCodeNotFound() {
+                qrCodeFoundButton.setVisibility(View.INVISIBLE);
+            }
+        }));
+
+        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, imageAnalysis, preview);
+
     }
 
 }
