@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_CODE);
             return true;
 
         }
         if (id == R.id.action_sync) {
-            System.out.println(new String("Wybrano sync"));
             startActivityForResult(new Intent(this, SyncActivity.class), REQUEST_CODE);
             return true;
         }

@@ -83,10 +83,10 @@ public class RemarksFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        nameTextView = (TextView) view.findViewById(R.id.textView2);
-        classTextView = (TextView) view.findViewById(R.id.textView3);
-        remarkTextView = (TextView) view.findViewById(R.id.textView4);
-        dateView = (TextView) view.findViewById(R.id.textView5);
+        nameTextView = (TextView) view.findViewById(R.id.deviceName);
+        classTextView = (TextView) view.findViewById(R.id.className);
+        remarkTextView = (TextView) view.findViewById(R.id.remarkText);
+        dateView = (TextView) view.findViewById(R.id.dateRemark);
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId, this);

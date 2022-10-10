@@ -76,7 +76,7 @@ public class DeviceMenuFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView = (TextView) view.findViewById(R.id.textView);
+        textView = (TextView) view.findViewById(R.id.deviceName);
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId, this);
@@ -84,7 +84,7 @@ public class DeviceMenuFragment extends Fragment {
             textView.setText(mdeviceName);
         }
 
-        binding.button2.setOnClickListener(new View.OnClickListener() {
+        binding.remarksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -95,7 +95,7 @@ public class DeviceMenuFragment extends Fragment {
             }
         });
 
-        binding.button6.setOnClickListener(new View.OnClickListener() {
+        binding.addWorkParameterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -106,7 +106,7 @@ public class DeviceMenuFragment extends Fragment {
             }
         });
 
-        binding.button8.setOnClickListener(new View.OnClickListener() {
+        binding.noteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -117,7 +117,7 @@ public class DeviceMenuFragment extends Fragment {
             }
         });
 
-        binding.button3.setOnClickListener(new View.OnClickListener() {
+        binding.repairHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -128,7 +128,7 @@ public class DeviceMenuFragment extends Fragment {
             }
         });
 
-        binding.button7.setOnClickListener(new View.OnClickListener() {
+        binding.DeviceManualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -138,7 +138,7 @@ public class DeviceMenuFragment extends Fragment {
 
             }
         });
-        binding.button9.setOnClickListener(new View.OnClickListener() {
+        binding.syncButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();

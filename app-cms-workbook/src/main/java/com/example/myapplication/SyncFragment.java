@@ -34,10 +34,10 @@ import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Sync#newInstance} factory method to
+ * Use the {@link SyncFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Sync extends Fragment {
+public class SyncFragment extends Fragment {
     ListView listview;
     Button Addbutton;
     EditText GetValue;
@@ -54,7 +54,7 @@ public class Sync extends Fragment {
 
     private String mdeviceId;
 
-    public Sync() {
+    public SyncFragment() {
         // Required empty public constructor
     }
 
@@ -71,8 +71,8 @@ public class Sync extends Fragment {
      * @return A new instance of fragment Note.
      */
     // TODO: Rename and change types and number of parameters
-    public static Sync newInstance(String param1, String param2) {
-        Sync fragment = new Sync();
+    public static SyncFragment newInstance(String param1, String param2) {
+        SyncFragment fragment = new SyncFragment();
         Bundle args = new Bundle();
         args.putString(deviceId, param1);
         fragment.setArguments(args);

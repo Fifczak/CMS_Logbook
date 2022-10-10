@@ -15,11 +15,16 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/gradient_background"
+            android:background="#2578B2"
             app:popupTheme="@style/Theme.MyApplication.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="45dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
