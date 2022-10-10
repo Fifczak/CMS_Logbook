@@ -12,7 +12,8 @@
         android:id="@+id/deviceName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12sp"
+        android:padding="8sp"
         android:text="@string/name"
-        android:textSize="20sp" />
+        android:textSize="24sp"
+        android:textColor="#2578B2"/>
 </LinearLayout>

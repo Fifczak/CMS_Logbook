@@ -25,13 +25,17 @@
         android:layout_marginTop="150dp"
         android:ems="10"
         android:hint="Enter value" />
+
     <Button
         android:id="@+id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText2"
         android:layout_marginTop="74dp"
-        android:text="ADD Value" />
+        android:text="ADD Value"
+        android:background="@drawable/gradient_background"
+        android:textColor="@color/white"
+        android:textSize="20dp"/>
 
     <!-- set the current state of the Switch-->
 

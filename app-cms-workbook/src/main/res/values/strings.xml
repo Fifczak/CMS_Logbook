@@ -1,22 +1,18 @@
 <resources>
     <string name="app_name">Smart Workbook</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="start_fragment_label">Start Fragment</string>
     <string name="device_list_fragment_label">Device List</string>
     <string name="qr_scanner_fragment_label">QR Code Scanner</string>
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="select_machine">Machine list</string>
     <string name="previous">Previous</string>
-    <string name="cbm_string_device_name">Device name
-        :</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cbm_string_device_name">Device name: </string>
     <string name="name">Name</string>
+    <string name="token_to_activate">Token to activate the application</string>
+    <string name="check_token">Check Token</string>
     <string name="repair_history">Repair history</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_sync">Sync </string>
+    <string name="title_activity_sync">SyncActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 </resources>
