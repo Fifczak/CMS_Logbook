@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import java.io.FileReader;
 
 import androidx.fragment.app.Fragment;
 
@@ -20,17 +21,25 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myapplication.databinding.FragmentSyncBinding;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import db.DeviceModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -105,11 +114,15 @@ public class SyncFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getRequest();
-//            downloadFile("3269.pdf");
-//            downloadFile("qrdata.json");
             }
         });
-
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("UPLOAD TEST");
+                sendRequest();
+            }
+        });
     }
 
 
@@ -131,7 +144,6 @@ public class SyncFragment extends Fragment {
                        Log.e("MainActivity", error.toString());
                 }
         ){
-
             /**
              * Passing some request headers
              */
@@ -149,6 +161,51 @@ public class SyncFragment extends Fragment {
 
         return reponse_l;
     }
+
+
+    private void sendRequest() {
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        String url = "https://api.info-marine.com/api/sync/send_qrdata";
+        JSONArray jsonObjectArray = new JSONArray();
+
+        try {
+            FileReader f = new FileReader("/storage/emulated/0/CMSData/qrdata.json");
+            BufferedReader br = new BufferedReader(f);
+            String currentJSONString  = "";
+            while ((currentJSONString = br.readLine()) != null) {
+                jsonObjectArray = new JSONArray(currentJSONString);
+
+            }
+        }catch(Exception e){
+
+        }
+
+        JsonArrayRequest putRequest = new JsonArrayRequest(Request.Method.PUT, url, jsonObjectArray,
+                (Response.Listener<JSONArray>) response -> {
+                    try {
+                        getFiles(response);
+                    } finally{}
+                },
+                (Response.ErrorListener) error -> {
+                    Log.e("MainActivity", error.toString());
+                }
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
+                return headers;
+            }
+        };
+
+        queue.add(putRequest);
+    }
+
+
 
     public void getFiles(JSONArray response){
         JSONArray jsonArray = response;
