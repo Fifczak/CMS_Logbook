@@ -80,7 +80,7 @@ public class QRCodeImageAnalysis implements Analyzer {
 
     try {
       final Result decodedBarcode = new QRCodeReader().decode(zxingBinaryBitmap);
-//      qrCodeAnalysisCallback.onQrCodeDetected(decodedBarcode.getText());
+      qrCodeAnalysisCallback.onQrCodeDetected(decodedBarcode.getText());
     } catch (NotFoundException | ChecksumException | FormatException e) {
       Log.e(TAG, "QR Code decoding error", e);
     }

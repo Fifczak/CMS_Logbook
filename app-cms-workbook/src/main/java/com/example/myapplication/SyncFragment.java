@@ -4,6 +4,7 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -152,7 +153,7 @@ public class SyncFragment extends Fragment {
 
     public void getFiles(JSONArray response){
         JSONArray jsonArray = response;
-        downloadFile("qrdata.pdf");
+        downloadFile("qrdata.json");
 
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
@@ -173,7 +174,7 @@ public class SyncFragment extends Fragment {
     }
 
     public void downloadFile(String filename){
-        File file = new File("/storage/emulated/0/CMSData/" + filename);
+        File file = new File(Environment.getExternalStorageDirectory() + "/CMSData/" + filename);
         boolean deleted = file.delete();
         DownloadManager downloadmanager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse("https://api.info-marine.com/api/download/" + filename);
@@ -182,7 +183,7 @@ public class SyncFragment extends Fragment {
         request.setDescription("Downloading");
         request.addRequestHeader("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
         request.setVisibleInDownloadsUi(false);
-        request.setDestinationUri(Uri.parse("file:/storage/emulated/0/CMSData/" + filename));
+        request.setDestinationUri(Uri.parse("file:" + Environment.getExternalStorageDirectory() + "/CMSData/" + filename));
         downloadmanager.enqueue(request);
     }
 

@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class DeviceListFragment extends Fragment {
 
 
         try {
-            String path = "/storage/emulated/0/CMSData/qrdata.json";
+            String path = Environment.getExternalStorageDirectory() + "/CMSData/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             Gson g = new Gson();
             DeviceModel[] deviceArray = g.fromJson(bufferedReader, DeviceModel[].class);

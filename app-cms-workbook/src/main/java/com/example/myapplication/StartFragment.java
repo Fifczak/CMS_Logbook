@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.myapplication.databinding.FragmentStartBinding;
+
+import java.util.Objects;
 
 public class StartFragment extends Fragment {
 
@@ -64,7 +67,11 @@ public class StartFragment extends Fragment {
         binding.buttonQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(view.getContext(), CameraActivity.class), REQUEST_CODE);
+                if (Objects.equals(Build.MODEL, "T21G")){
+                    startActivityForResult(new Intent(view.getContext(), CameraRWActivity.class), REQUEST_CODE);
+                } else {
+                    startActivityForResult(new Intent(view.getContext(), CameraActivity.class), REQUEST_CODE);
+                }
             }
         });
     }
@@ -75,8 +82,14 @@ public class StartFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             if (data != null) {
-                devId = data.getStringExtra(CameraActivity.QR_SCAN_RESULT);
-                devName = "Trzeba zrobić z jsona"; // data.getStringExtra(CameraActivity.QR_SCAN_RESULT);
+                if (Objects.equals(Build.MODEL, "T21G")){
+                    devId = data.getStringExtra(CameraRWActivity.QR_SCAN_RESULT);
+                    devName = "Trzeba zrobić z jsona"; // data.getStringExtra(CameraActivity.QR_SCAN_RESULT);
+                } else {
+                    devId = data.getStringExtra(CameraActivity.QR_SCAN_RESULT);
+                    devName = "Trzeba zrobić z jsona"; // data.getStringExtra(CameraActivity.QR_SCAN_RESULT);
+                }
+
 
                 Navigation.findNavController(binding.getRoot()).navigate(StartFragmentDirections.actionStartFragmentToDeviceMenuFragment(devId, devName));
             }

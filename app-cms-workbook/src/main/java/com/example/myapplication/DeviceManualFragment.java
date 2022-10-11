@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class DeviceManualFragment extends Fragment {
         mdeviceId = getArguments().getString(deviceId);
 
         PDFView pdfView = view.findViewById(R.id.pdfView);
-        String path = "/storage/emulated/0/CMSData/"+ mdeviceId +".pdf";
+        String path = Environment.getExternalStorageDirectory() + "/CMSData/" + mdeviceId + ".pdf";
         try {
             pdfView.fromFile(new File(path)).load();
         }

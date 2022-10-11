@@ -157,7 +157,7 @@ public class DeviceMenuFragment extends Fragment {
         deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null);
 
         try {
-            String path = "/storage/emulated/0/CMSData/qrdata.json";
+            String path = Environment.getExternalStorageDirectory() + "/CMSData/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             Gson g = new Gson();
             DeviceModel[] deviceArray = g.fromJson(bufferedReader, DeviceModel[].class);
