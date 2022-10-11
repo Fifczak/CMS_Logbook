@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
+import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -9,12 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import java.io.FileReader;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -53,6 +58,9 @@ public class SyncFragment extends Fragment {
     EditText GetValue;
     ArrayList<String> ListElements = new ArrayList<String>();
 
+    private Animation slideRight;
+    private Animation slideLeft;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String deviceId = "deviceId";
@@ -71,6 +79,7 @@ public class SyncFragment extends Fragment {
     public LayoutInflater public_inflater;
     public ViewGroup public_container;
     private FragmentSyncBinding binding;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -95,6 +104,7 @@ public class SyncFragment extends Fragment {
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
         }
+
     }
 
     @Override
@@ -105,19 +115,28 @@ public class SyncFragment extends Fragment {
         public_inflater = inflater;
         public_container = container;
         binding = FragmentSyncBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        slideLeft = AnimationUtils.loadAnimation(view.getContext(), R.anim.enter_anim);
+        slideRight = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_from_right);
+        binding.uploadDataButton.clearAnimation();
+        binding.downloadStructureButton.clearAnimation();
+        binding.downloadManualsButton.clearAnimation();
+        binding.uploadDataButton.startAnimation(slideLeft);
+        binding.downloadStructureButton.startAnimation(slideRight);
+        binding.downloadManualsButton.startAnimation(slideLeft);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.button5.setOnClickListener(new View.OnClickListener() {
+        binding.downloadStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getRequest();
             }
         });
-        binding.button.setOnClickListener(new View.OnClickListener() {
+        binding.uploadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("UPLOAD TEST");
@@ -240,7 +259,7 @@ public class SyncFragment extends Fragment {
         request.setDescription("Downloading");
         request.addRequestHeader("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
         request.setVisibleInDownloadsUi(false);
-        request.setDestinationUri(Uri.parse("file:" + Environment.getExternalStorageDirectory() + "/CMSData/" + filename));
+//        request.setDestinationUri(Uri.parse("file:" + Environment.getExternalStorageDirectory() + "/CMSData/" + filename));
         downloadmanager.enqueue(request);
     }
 

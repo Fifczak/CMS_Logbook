@@ -91,7 +91,7 @@ public class StartFragment extends Fragment {
                 }
 
 
-                Navigation.findNavController(binding.getRoot()).navigate(StartFragmentDirections.actionStartFragmentToDeviceMenuFragment(devId, devName));
+//                Navigation.findNavController(binding.getRoot()).navigate(StartFragmentDirections.actionStartFragmentToDeviceMenuFragment(devId, devName));
             }
         }
     }

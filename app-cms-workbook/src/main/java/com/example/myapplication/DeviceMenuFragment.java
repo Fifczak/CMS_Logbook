@@ -11,6 +11,8 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -36,8 +38,10 @@ public class DeviceMenuFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mdeviceId;
     private String mdeviceName;
-
     private TextView textView;
+
+    private Animation slideRight;
+    private Animation slideLeft;
 
 
     public DeviceMenuFragment() {
@@ -71,6 +75,21 @@ public class DeviceMenuFragment extends Fragment {
         public_inflater = inflater;
         public_container = container;
         binding = FragmentDeviceMenuBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        slideLeft = AnimationUtils.loadAnimation(view.getContext(), R.anim.enter_anim);
+        slideRight = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_from_right);
+        binding.repairHistoryButton.clearAnimation();
+        binding.addWorkParameterButton.clearAnimation();
+        binding.noteButton.clearAnimation();
+        binding.remarksButton.clearAnimation();
+        binding.DeviceManualButton.clearAnimation();
+        binding.syncButton.clearAnimation();
+        binding.repairHistoryButton.startAnimation(slideRight);
+        binding.addWorkParameterButton.startAnimation(slideRight);
+        binding.noteButton.startAnimation(slideRight);
+        binding.remarksButton.startAnimation(slideLeft);
+        binding.DeviceManualButton.startAnimation(slideLeft);
+        binding.syncButton.startAnimation(slideLeft);
         return binding.getRoot();
     }
     @Override

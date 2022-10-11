@@ -43,10 +43,6 @@ public class DeviceListFragment extends Fragment {
         listView = binding.listview;
         ArrayList<DeviceListModel> arrayList = new ArrayList<>();
 
-
-
-
-
         try {
             String path = Environment.getExternalStorageDirectory() + "/CMSData/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
@@ -58,7 +54,6 @@ public class DeviceListFragment extends Fragment {
                 String deviceName = String.valueOf(device.getDeviceName());
 
                 arrayList.add(new DeviceListModel(imId, deviceName));
-
 
             }
         }
