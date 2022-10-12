@@ -30,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/gradient_background_buttons_right"
         android:text="@string/select_machine"

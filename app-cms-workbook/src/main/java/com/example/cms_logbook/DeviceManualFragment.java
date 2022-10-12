@@ -69,7 +69,7 @@ public class DeviceManualFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mdeviceId = getArguments().getString(deviceId);
             PDFView pdfView = view.findViewById(R.id.pdfView);
-            String path = Environment.getExternalStorageDirectory() + "/CMSData/" + mdeviceId + ".pdf";
+            String path = getContext().getExternalFilesDir("CMSData") + "/" + mdeviceId + ".pdf";
             try {
                 pdfView.fromFile(new File(path)).load();
             }
