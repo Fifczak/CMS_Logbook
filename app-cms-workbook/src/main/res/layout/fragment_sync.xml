@@ -58,4 +58,17 @@
         app:layout_constraintTop_toBottomOf="@id/downloadStructureButton"/>
 
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/loadGif"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/loading"
+        android:translationZ="5dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

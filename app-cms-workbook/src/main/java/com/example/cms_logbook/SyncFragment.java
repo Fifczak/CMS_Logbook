@@ -123,6 +123,10 @@ public class SyncFragment extends Fragment {
         binding.downloadStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                binding.uploadDataButton.setEnabled(false);
+                binding.downloadStructureButton.setEnabled(false);
+                binding.downloadManualsButton.setEnabled(false);
+                binding.loadGif.setVisibility(View.VISIBLE);
                 getRequest();
             }
         });
@@ -250,8 +254,11 @@ public class SyncFragment extends Fragment {
         request.addRequestHeader("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
         request.setVisibleInDownloadsUi(false);
         request.setDestinationInExternalFilesDir(getContext(), "/CMSData/", filename);
-//        request.setDestinationInExternalPublicDir("CMSData", filename);
         downloadmanager.enqueue(request);
+        binding.loadGif.setVisibility(View.INVISIBLE);
+        binding.uploadDataButton.setEnabled(true);
+        binding.downloadStructureButton.setEnabled(true);
+        binding.downloadManualsButton.setEnabled(true);
     }
 
 }
