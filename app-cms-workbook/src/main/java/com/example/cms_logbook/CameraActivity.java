@@ -1,7 +1,6 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 
-import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,11 +13,10 @@ import android.util.Size;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraX;
-import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.navigation.ui.AppBarConfiguration;
 
-import com.example.myapplication.QRCodeImageAnalysis.QrCodeAnalysisCallback;
+import com.example.cms_logbook.QRCodeImageAnalysis.QrCodeAnalysisCallback;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -1,9 +1,8 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -11,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.myapplication.databinding.FragmentRemarksBinding;
+import com.example.cms_logbook.databinding.FragmentRemarksBinding;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -113,7 +112,7 @@ public class RemarksFragment extends Fragment {
         deviceScanned = new DeviceModel(null,null, null, null, null, null,null, null, null, null);
 
         try {
-            String path = Environment.getExternalStorageDirectory() + "/CMSData/qrdata.json";
+            String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             Gson g = new Gson();
             DeviceModel[] deviceArray = g.fromJson(bufferedReader, DeviceModel[].class);

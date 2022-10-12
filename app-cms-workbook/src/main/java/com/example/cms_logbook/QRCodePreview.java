@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 import android.view.TextureView;
 import android.view.ViewGroup;

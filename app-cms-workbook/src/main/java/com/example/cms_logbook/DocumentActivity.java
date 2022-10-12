@@ -1,4 +1,6 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
+
+import static androidx.camera.core.CameraX.getContext;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,20 +8,19 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.content.FileProvider;
-import android.view.View;
+
+import android.os.Environment;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Activity that shows how open a document on a HMT-1 device
  */
 public class DocumentActivity extends Activity {
 
-    private final String mSampleFileName = "sample.pdf";
-    private final String mSampleFolderName = "Documents";
+    private String mSampleFileName = "";
     private final String mSampleMimeType = "application/pdf";
 
     private File mSampleFile;
@@ -38,21 +39,15 @@ public class DocumentActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.document_main);
 
+        mSampleFileName = this.getIntent().getStringExtra("device_id") + ".pdf";
+
         try {
-            System.out.println(mSampleFileName);
-            System.out.println(mSampleFolderName);
-            mSampleFile = Utils.copyFromAssetsToExternal(this, mSampleFileName, mSampleFolderName);
-        } catch (IOException ex) {
+            String path = this.getExternalFilesDir("CMSData") + "/" + mSampleFileName;
+            mSampleFile = new File(path);
+        } catch (Exception ex) {
             Toast.makeText(this, "Failed to copy sample file", Toast.LENGTH_LONG).show();
         }
-    }
 
-    /**
-     * Listener for when a the launch document viewer button is clicked
-     *
-     * @param view The launch launch document viewer button
-     */
-    public void onLaunchDocument(View view) {
         final Uri contentUri = FileProvider.getUriForFile(
                 getApplicationContext(),
                 getApplicationContext().getPackageName() + ".fileprovider",
@@ -70,13 +65,15 @@ public class DocumentActivity extends Activity {
         viewIntent.setDataAndType(contentUri, mSampleMimeType);
         viewIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        //
-        // Optionally can control visual appearance
-        //
-
         viewIntent.putExtra("page", "1"); // Open a specific page
         viewIntent.putExtra("zoom", "2"); // Open at a specific zoom level
 
         startActivity(viewIntent);
     }
+
+    /**
+     * Listener for when a the launch document viewer button is clicked
+     *
+     * @param view The launch launch document viewer button
+     */
 }

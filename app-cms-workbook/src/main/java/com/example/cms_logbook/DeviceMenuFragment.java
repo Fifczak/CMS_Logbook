@@ -1,7 +1,7 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,9 +17,10 @@ import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Objects;
 
-import com.example.myapplication.databinding.FragmentDeviceMenuBinding;
-import com.example.myapplication.databinding.FragmentStartBinding;
+import com.example.cms_logbook.databinding.FragmentDeviceMenuBinding;
+import com.example.cms_logbook.databinding.FragmentStartBinding;
 import com.google.gson.Gson;
 
 import db.DeviceModel;
@@ -30,6 +31,8 @@ import db.DeviceModel;
  * create an instance of this fragment.
  */
 public class DeviceMenuFragment extends Fragment {
+
+    private static final int REQUEST_CODE = 105;
 
     // TODO: Rename parameter arguments, choose names that match
     private static final String deviceId = "deviceId";
@@ -150,11 +153,16 @@ public class DeviceMenuFragment extends Fragment {
         binding.DeviceManualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("deviceId", mdeviceId);
-                NavHostFragment.findNavController(DeviceMenuFragment.this)
-                        .navigate(R.id.action_deviceMenuFragment_to_deviceManualFragment, bundle);
-
+                if (Objects.equals(Build.MODEL, "T21G")){
+                    Intent documentIntent = new Intent(view.getContext(), DocumentActivity.class);
+                    documentIntent.putExtra("device_id", mdeviceId);
+                    startActivityForResult(documentIntent, REQUEST_CODE);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("deviceId", mdeviceId);
+                    NavHostFragment.findNavController(DeviceMenuFragment.this)
+                            .navigate(R.id.action_deviceMenuFragment_to_deviceManualFragment, bundle);
+                }
             }
         });
         binding.syncButton.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +184,7 @@ public class DeviceMenuFragment extends Fragment {
         deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null);
 
         try {
-            String path = Environment.getExternalStorageDirectory() + "/CMSData/qrdata.json";
+            String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             Gson g = new Gson();
             DeviceModel[] deviceArray = g.fromJson(bufferedReader, DeviceModel[].class);

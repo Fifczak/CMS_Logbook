@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 
 import android.content.Context;

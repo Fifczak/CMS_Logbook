@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.databinding.FragmentSettingsBinding;
+import com.example.cms_logbook.databinding.FragmentSettingsBinding;
 
 public class SettingsFragment extends Fragment {
 

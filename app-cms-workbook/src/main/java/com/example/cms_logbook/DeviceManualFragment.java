@@ -1,7 +1,5 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,10 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.github.barteksc.pdfviewer.PDFView;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,8 +18,6 @@ import java.util.Objects;
  * create an instance of this fragment.
  */
 public class DeviceManualFragment extends Fragment {
-
-    private static final int REQUEST_CODE = 105;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,9 +68,6 @@ public class DeviceManualFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mdeviceId = getArguments().getString(deviceId);
-        if (Objects.equals(Build.MODEL, "T21G")){
-            startActivityForResult(new Intent(view.getContext(), DocumentActivity.class), REQUEST_CODE);
-        } else {
             PDFView pdfView = view.findViewById(R.id.pdfView);
             String path = Environment.getExternalStorageDirectory() + "/CMSData/" + mdeviceId + ".pdf";
             try {
@@ -86,7 +76,6 @@ public class DeviceManualFragment extends Fragment {
             catch(Exception e){
                 System.out.println(e);
             }
-        }
 
     }
 }

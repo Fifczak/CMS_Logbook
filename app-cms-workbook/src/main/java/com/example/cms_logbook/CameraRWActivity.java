@@ -1,11 +1,9 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 public class CameraRWActivity extends Activity implements QRCodeImageAnalysis.QrCodeAnalysisCallback {
 

@@ -1,9 +1,7 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
-import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,7 +17,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 import java.io.FileReader;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -27,25 +24,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.myapplication.databinding.FragmentSyncBinding;
-import com.google.gson.Gson;
+import com.example.cms_logbook.databinding.FragmentSyncBinding;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import db.DeviceModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -250,7 +240,7 @@ public class SyncFragment extends Fragment {
     }
 
     public void downloadFile(String filename){
-        File file = new File(Environment.getExternalStorageDirectory() + "/CMSData/" + filename);
+        File file = new File(getContext().getExternalFilesDir("CMSData") + "/" + filename);
         boolean deleted = file.delete();
         DownloadManager downloadmanager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse("https://api.info-marine.com/api/download/" + filename);
@@ -259,7 +249,8 @@ public class SyncFragment extends Fragment {
         request.setDescription("Downloading");
         request.addRequestHeader("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
         request.setVisibleInDownloadsUi(false);
-//        request.setDestinationUri(Uri.parse("file:" + Environment.getExternalStorageDirectory() + "/CMSData/" + filename));
+        request.setDestinationInExternalFilesDir(getContext(), "/CMSData/", filename);
+//        request.setDestinationInExternalPublicDir("CMSData", filename);
         downloadmanager.enqueue(request);
     }
 
