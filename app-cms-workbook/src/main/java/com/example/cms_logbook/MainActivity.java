@@ -1,24 +1,17 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.myapplication.databinding.ActivityMainBinding;
+import com.example.cms_logbook.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -63,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_CODE);
+            Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.action_startFragment_to_nav_settings_graph);
             return true;
 
         }
         if (id == R.id.action_sync) {
-            startActivityForResult(new Intent(this, SyncActivity.class), REQUEST_CODE);
+            Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.action_startFragment_to_nav_sync_graph);
             return true;
         }
 

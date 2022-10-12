@@ -1,21 +1,18 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.myapplication.databinding.FragmentDeviceListBinding;
+import com.example.cms_logbook.databinding.FragmentDeviceListBinding;
 import com.google.gson.Gson;
 
 import db.DeviceListModel;
@@ -42,12 +39,8 @@ public class DeviceListFragment extends Fragment {
         listView = binding.listview;
         ArrayList<DeviceListModel> arrayList = new ArrayList<>();
 
-
-
-
-
         try {
-            String path = "/storage/emulated/0/CMSData/qrdata.json";
+            String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             Gson g = new Gson();
             DeviceModel[] deviceArray = g.fromJson(bufferedReader, DeviceModel[].class);
@@ -57,7 +50,6 @@ public class DeviceListFragment extends Fragment {
                 String deviceName = String.valueOf(device.getDeviceName());
 
                 arrayList.add(new DeviceListModel(imId, deviceName));
-
 
             }
         }

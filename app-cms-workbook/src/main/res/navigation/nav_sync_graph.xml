@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph2"
+    android:id="@+id/nav_sync_graph"
     app:startDestination="@id/sync2">
     <fragment
         android:id="@+id/sync2"
-        android:name="com.example.myapplication.SyncFragment"
+        android:name="com.example.cms_logbook.SyncFragment"
         android:label="Sync"
         tools:layout="@layout/fragment_sync" />
 </navigation>

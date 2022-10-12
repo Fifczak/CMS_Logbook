@@ -1,17 +1,16 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.github.barteksc.pdfviewer.PDFView;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,14 +68,14 @@ public class DeviceManualFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mdeviceId = getArguments().getString(deviceId);
+            PDFView pdfView = view.findViewById(R.id.pdfView);
+            String path = getContext().getExternalFilesDir("CMSData") + "/" + mdeviceId + ".pdf";
+            try {
+                pdfView.fromFile(new File(path)).load();
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
 
-        PDFView pdfView = view.findViewById(R.id.pdfView);
-        String path = "/storage/emulated/0/CMSData/"+ mdeviceId +".pdf";
-        try {
-            pdfView.fromFile(new File(path)).load();
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
     }
 }

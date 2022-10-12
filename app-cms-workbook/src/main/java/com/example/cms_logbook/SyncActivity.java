@@ -1,35 +1,31 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.myapplication.databinding.ActivitySettingsBinding;
+import com.example.cms_logbook.databinding.ActivitySyncBinding;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SyncActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivitySettingsBinding binding;
+    private ActivitySyncBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        binding = ActivitySyncBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_settings);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_sync);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
@@ -37,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_settings);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_sync);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }

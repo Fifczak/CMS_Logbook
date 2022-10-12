@@ -1,7 +1,7 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,13 +11,16 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Objects;
 
-import com.example.myapplication.databinding.FragmentDeviceMenuBinding;
-import com.example.myapplication.databinding.FragmentStartBinding;
+import com.example.cms_logbook.databinding.FragmentDeviceMenuBinding;
+import com.example.cms_logbook.databinding.FragmentStartBinding;
 import com.google.gson.Gson;
 
 import db.DeviceModel;
@@ -29,6 +32,8 @@ import db.DeviceModel;
  */
 public class DeviceMenuFragment extends Fragment {
 
+    private static final int REQUEST_CODE = 105;
+
     // TODO: Rename parameter arguments, choose names that match
     private static final String deviceId = "deviceId";
     private static final String deviceName = "deviceName";
@@ -36,8 +41,10 @@ public class DeviceMenuFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mdeviceId;
     private String mdeviceName;
-
     private TextView textView;
+
+    private Animation slideRight;
+    private Animation slideLeft;
 
 
     public DeviceMenuFragment() {
@@ -71,6 +78,21 @@ public class DeviceMenuFragment extends Fragment {
         public_inflater = inflater;
         public_container = container;
         binding = FragmentDeviceMenuBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        slideLeft = AnimationUtils.loadAnimation(view.getContext(), R.anim.enter_anim);
+        slideRight = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_from_right);
+        binding.repairHistoryButton.clearAnimation();
+        binding.addWorkParameterButton.clearAnimation();
+        binding.noteButton.clearAnimation();
+        binding.remarksButton.clearAnimation();
+        binding.DeviceManualButton.clearAnimation();
+        binding.syncButton.clearAnimation();
+        binding.repairHistoryButton.startAnimation(slideRight);
+        binding.addWorkParameterButton.startAnimation(slideRight);
+        binding.noteButton.startAnimation(slideRight);
+        binding.remarksButton.startAnimation(slideLeft);
+        binding.DeviceManualButton.startAnimation(slideLeft);
+        binding.syncButton.startAnimation(slideLeft);
         return binding.getRoot();
     }
     @Override
@@ -131,11 +153,16 @@ public class DeviceMenuFragment extends Fragment {
         binding.DeviceManualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("deviceId", mdeviceId);
-                NavHostFragment.findNavController(DeviceMenuFragment.this)
-                        .navigate(R.id.action_deviceMenuFragment_to_deviceManualFragment, bundle);
-
+                if (Objects.equals(Build.MODEL, "T21G")){
+                    Intent documentIntent = new Intent(view.getContext(), DocumentActivity.class);
+                    documentIntent.putExtra("device_id", mdeviceId);
+                    startActivityForResult(documentIntent, REQUEST_CODE);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("deviceId", mdeviceId);
+                    NavHostFragment.findNavController(DeviceMenuFragment.this)
+                            .navigate(R.id.action_deviceMenuFragment_to_deviceManualFragment, bundle);
+                }
             }
         });
         binding.syncButton.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +184,7 @@ public class DeviceMenuFragment extends Fragment {
         deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null);
 
         try {
-            String path = "/storage/emulated/0/CMSData/qrdata.json";
+            String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             Gson g = new Gson();
             DeviceModel[] deviceArray = g.fromJson(bufferedReader, DeviceModel[].class);

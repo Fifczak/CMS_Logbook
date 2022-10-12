@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.myapplication.StartFragment"
+        android:name="com.example.cms_logbook.StartFragment"
         android:label="CMS logbook"
         tools:layout="@layout/fragment_start" >
         <action
@@ -31,10 +31,17 @@
             app:exitAnim="@anim/exit_anim"
             app:popEnterAnim="@anim/pop_enter_anim"
             app:popExitAnim="@anim/pop_exit_anim" />
+        <action
+            android:id="@+id/action_startFragment_to_nav_sync_graph"
+            app:destination="@id/nav_sync_graph" />
+        <action
+            android:id="@+id/action_startFragment_to_nav_settings_graph"
+            app:destination="@id/nav_settings_graph" />
+
     </fragment>
     <fragment
         android:id="@+id/deviceListFragment"
-        android:name="com.example.myapplication.DeviceListFragment"
+        android:name="com.example.cms_logbook.DeviceListFragment"
         android:label="Devices list"
         tools:layout="@layout/fragment_device_list" >
         <action
@@ -47,12 +54,12 @@
     </fragment>
     <activity
         android:id="@+id/cameraActivity"
-        android:name="com.example.myapplication.CameraActivity"
+        android:name="com.example.cms_logbook.CameraActivity"
         android:label="fragment_qr_scanner"
         tools:layout="@layout/activiti_camera" />
     <fragment
         android:id="@+id/deviceMenuFragment"
-        android:name="com.example.myapplication.DeviceMenuFragment"
+        android:name="com.example.cms_logbook.DeviceMenuFragment"
         android:label="Device menu"
         tools:layout="@layout/fragment_device_menu" >
         <argument
@@ -106,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/remarksFragment"
-        android:name="com.example.myapplication.RemarksFragment"
+        android:name="com.example.cms_logbook.RemarksFragment"
         android:label="Device remarks"
         tools:layout="@layout/fragment_remarks">
         <argument
@@ -118,27 +125,29 @@
         </fragment>
     <fragment
         android:id="@+id/repairHistoryFragment"
-        android:name="com.example.myapplication.RepairHistoryFragment"
+        android:name="com.example.cms_logbook.RepairHistoryFragment"
         android:label="Repair history"
         tools:layout="@layout/fragment_repair_history" />
     <fragment
         android:id="@+id/addWorkParametersFragment"
-        android:name="com.example.myapplication.AddWorkParametersFragment"
+        android:name="com.example.cms_logbook.AddWorkParametersFragment"
         android:label="Add parameter value"
         tools:layout="@layout/fragment_add_work_parameters" />
     <fragment
         android:id="@+id/deviceManualFragment"
-        android:name="com.example.myapplication.DeviceManualFragment"
+        android:name="com.example.cms_logbook.DeviceManualFragment"
         android:label="Device manual"
         tools:layout="@layout/fragment_device_manual" />
     <fragment
         android:id="@+id/note"
-        android:name="com.example.myapplication.Note"
+        android:name="com.example.cms_logbook.Note"
         android:label="Note"
         tools:layout="@layout/fragment_note" />
     <fragment
         android:id="@+id/sync"
-        android:name="com.example.myapplication.SyncFragment"
+        android:name="com.example.cms_logbook.SyncFragment"
         android:label="Sync"
         tools:layout="@layout/fragment_sync" />
+    <include app:graph="@navigation/nav_settings_graph" />
+    <include app:graph="@navigation/nav_sync_graph" />
 </navigation>

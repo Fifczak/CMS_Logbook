@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.example.myapplication;
+package com.example.cms_logbook;
 
-import android.graphics.Bitmap;
 import android.util.Log;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageAnalysis.Analyzer;
@@ -80,7 +79,7 @@ public class QRCodeImageAnalysis implements Analyzer {
 
     try {
       final Result decodedBarcode = new QRCodeReader().decode(zxingBinaryBitmap);
-//      qrCodeAnalysisCallback.onQrCodeDetected(decodedBarcode.getText());
+      qrCodeAnalysisCallback.onQrCodeDetected(decodedBarcode.getText());
     } catch (NotFoundException | ChecksumException | FormatException e) {
       Log.e(TAG, "QR Code decoding error", e);
     }

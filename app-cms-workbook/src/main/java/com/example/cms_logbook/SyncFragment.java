@@ -1,13 +1,16 @@
-package com.example.myapplication;
+package com.example.cms_logbook;
 
 import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,25 +24,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.myapplication.databinding.FragmentSyncBinding;
-import com.google.gson.Gson;
+import com.example.cms_logbook.databinding.FragmentSyncBinding;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import db.DeviceModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +47,9 @@ public class SyncFragment extends Fragment {
     Button Addbutton;
     EditText GetValue;
     ArrayList<String> ListElements = new ArrayList<String>();
+
+    private Animation slideRight;
+    private Animation slideLeft;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,6 +69,7 @@ public class SyncFragment extends Fragment {
     public LayoutInflater public_inflater;
     public ViewGroup public_container;
     private FragmentSyncBinding binding;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -94,6 +94,7 @@ public class SyncFragment extends Fragment {
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
         }
+
     }
 
     @Override
@@ -104,19 +105,32 @@ public class SyncFragment extends Fragment {
         public_inflater = inflater;
         public_container = container;
         binding = FragmentSyncBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        slideLeft = AnimationUtils.loadAnimation(view.getContext(), R.anim.enter_anim);
+        slideRight = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_from_right);
+        binding.uploadDataButton.clearAnimation();
+        binding.downloadStructureButton.clearAnimation();
+        binding.downloadManualsButton.clearAnimation();
+        binding.uploadDataButton.startAnimation(slideLeft);
+        binding.downloadStructureButton.startAnimation(slideRight);
+        binding.downloadManualsButton.startAnimation(slideLeft);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.button5.setOnClickListener(new View.OnClickListener() {
+        binding.downloadStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                binding.uploadDataButton.setEnabled(false);
+                binding.downloadStructureButton.setEnabled(false);
+                binding.downloadManualsButton.setEnabled(false);
+                binding.loadGif.setVisibility(View.VISIBLE);
                 getRequest();
             }
         });
-        binding.button.setOnClickListener(new View.OnClickListener() {
+        binding.uploadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("UPLOAD TEST");
@@ -209,7 +223,7 @@ public class SyncFragment extends Fragment {
 
     public void getFiles(JSONArray response){
         JSONArray jsonArray = response;
-        downloadFile("qrdata.pdf");
+        downloadFile("qrdata.json");
 
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
@@ -230,7 +244,7 @@ public class SyncFragment extends Fragment {
     }
 
     public void downloadFile(String filename){
-        File file = new File("/storage/emulated/0/CMSData/" + filename);
+        File file = new File(getContext().getExternalFilesDir("CMSData") + "/" + filename);
         boolean deleted = file.delete();
         DownloadManager downloadmanager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse("https://api.info-marine.com/api/download/" + filename);
@@ -239,8 +253,12 @@ public class SyncFragment extends Fragment {
         request.setDescription("Downloading");
         request.addRequestHeader("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
         request.setVisibleInDownloadsUi(false);
-        request.setDestinationUri(Uri.parse("file:/storage/emulated/0/CMSData/" + filename));
+        request.setDestinationInExternalFilesDir(getContext(), "/CMSData/", filename);
         downloadmanager.enqueue(request);
+        binding.loadGif.setVisibility(View.INVISIBLE);
+        binding.uploadDataButton.setEnabled(true);
+        binding.downloadStructureButton.setEnabled(true);
+        binding.downloadManualsButton.setEnabled(true);
     }
 
 }
