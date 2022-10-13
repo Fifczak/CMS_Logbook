@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher_cms_logo);
     }
 
     @Override
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == R.id.action_sync) {
             Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.action_startFragment_to_nav_sync_graph);
+            return true;
+        }
+        if (id == R.id.action_close_app) {
+            finish();
             return true;
         }
 

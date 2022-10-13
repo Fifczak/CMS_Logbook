@@ -71,9 +71,4 @@ public class DocumentActivity extends Activity {
         startActivity(viewIntent);
     }
 
-    /**
-     * Listener for when a the launch document viewer button is clicked
-     *
-     * @param view The launch launch document viewer button
-     */
 }
