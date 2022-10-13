@@ -32,7 +32,6 @@
         android:ems="10"
         android:hint="Enter note"
         android:layout_marginTop="15dp"
-        app:constraintTop_toBottomOf="@+id/addNoteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
