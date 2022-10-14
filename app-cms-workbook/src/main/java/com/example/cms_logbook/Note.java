@@ -130,9 +130,6 @@ public class Note extends Fragment {
             }
         });
 
-
-
-
         }
 
     private DeviceModel getDeviceFromQR(String qrId, Note context) {

@@ -96,18 +96,17 @@ public class RepairHistoryFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        listview = (ListView) view.findViewById(R.id.listView2);
-        Addbutton = (Button) view.findViewById(R.id.button2);
+        listview = (ListView) view.findViewById(R.id.repairHistoryList);
+        Addbutton = (Button) view.findViewById(R.id.addButton);
 
-        GetRhsValue = (EditText) view.findViewById(R.id.editText1);
-        GetComment = (EditText) view.findViewById(R.id.editText2);
+        GetRhsValue = (EditText) view.findViewById(R.id.rhsInput);
+        GetComment = (EditText) view.findViewById(R.id.commentInput);
         GetOvh = (Switch) view.findViewById(R.id.simpleSwitch);
 
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId);
             ArrayList<DeviceOverhaulModel> mdeviceOverhauls = deviceScanned.getDeviceOverhauls();
-            System.out.println(mdeviceOverhauls);
             for (DeviceOverhaulModel ovhModel : mdeviceOverhauls) {
                 ListElements.add(ovhModel.toString());
 

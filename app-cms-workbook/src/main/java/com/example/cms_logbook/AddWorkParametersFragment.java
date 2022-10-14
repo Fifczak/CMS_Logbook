@@ -104,8 +104,8 @@ public class AddWorkParametersFragment extends Fragment {
 //
 
 
-        listview = (ListView) view.findViewById(R.id.listView2);
-        Addbutton = (Button) view.findViewById(R.id.button2);
+        listview = (ListView) view.findViewById(R.id.workParametersList);
+        Addbutton = (Button) view.findViewById(R.id.addButton);
         GetValue = (EditText) view.findViewById(R.id.editText2);
         GetTask = (Spinner) view.findViewById(R.id.spinner2);
 

@@ -1,19 +1,26 @@
 package com.example.cms_logbook;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.cms_logbook.databinding.ActivityMainBinding;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher_cms_logo);
     }
 
     @Override
@@ -55,13 +63,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.action_startFragment_to_nav_settings_graph);
-            return true;
 
+        if (id == R.id.action_settings) {
+            startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_CODE);
+            return true;
         }
         if (id == R.id.action_sync) {
-            Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.action_startFragment_to_nav_sync_graph);
+            startActivityForResult(new Intent(this, SyncActivity.class), REQUEST_CODE);
+            return true;
+        }
+        if (id == R.id.action_close_app) {
+            finish();
             return true;
         }
 
