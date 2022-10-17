@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.os.Environment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -32,10 +33,10 @@ import db.DeviceOverhaulModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RepairHistoryFragment#newInstance} factory method to
+ * Use the {@link RepairHistoryListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RepairHistoryFragment extends Fragment {
+public class RepairHistoryListFragment extends Fragment {
     ListView listview;
     Button Addbutton;
     EditText GetRhsValue;
@@ -55,7 +56,7 @@ public class RepairHistoryFragment extends Fragment {
     ArrayList<String> ListElements = new ArrayList<String>();
 
 
-    public RepairHistoryFragment() {
+    public RepairHistoryListFragment() {
         // Required empty public constructor
     }
 
@@ -68,8 +69,8 @@ public class RepairHistoryFragment extends Fragment {
      * @return A new instance of fragment RepairHistoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RepairHistoryFragment newInstance(String param1, String param2) {
-        RepairHistoryFragment fragment = new RepairHistoryFragment();
+    public static RepairHistoryListFragment newInstance(String param1, String param2) {
+        RepairHistoryListFragment fragment = new RepairHistoryListFragment();
         Bundle args = new Bundle();
         args.putString(deviceId, param1);
         args.putString(ARG_PARAM2, param2);
@@ -90,7 +91,7 @@ public class RepairHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_repair_history, container, false);
+        return inflater.inflate(R.layout.fragment_repair_history_list, container, false);
     }
 
     @Override
@@ -110,7 +111,6 @@ public class RepairHistoryFragment extends Fragment {
             for (DeviceOverhaulModel ovhModel : mdeviceOverhauls) {
                 ListElements.add(ovhModel.toString());
 
-                System.out.println(ovhModel.toString());
 
             }
         }
@@ -127,27 +127,31 @@ public class RepairHistoryFragment extends Fragment {
         Addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String device_maintanance_rhs = GetRhsValue.getText().toString();
-                int deviceMaintananceRhs=Integer.parseInt(device_maintanance_rhs);
-                int deviceFkey=Integer.parseInt(mdeviceId);
+                if( TextUtils.isEmpty(GetRhsValue.getText()) & TextUtils.isEmpty(GetComment.getText())){
+                    Toast.makeText(getActivity(), "RHS and Comment are required!", Toast.LENGTH_LONG).show();
+                } else {
+                    String device_maintanance_rhs = GetRhsValue.getText().toString();
+                    int deviceMaintananceRhs=Integer.parseInt(device_maintanance_rhs);
+                    int deviceFkey=Integer.parseInt(mdeviceId);
 
-                String device_maintanance_comment = GetComment.getText().toString();
+                    String device_maintanance_comment = GetComment.getText().toString();
 
-                String pattern = "yyyy-MM-dd HH:mm:ss"; //
-                DateFormat df = new SimpleDateFormat(pattern);
-                Date today = Calendar.getInstance().getTime();
-                String todayAsString = df.format(today);
+                    String pattern = "yyyy-MM-dd HH:mm:ss"; //
+                    DateFormat df = new SimpleDateFormat(pattern);
+                    Date today = Calendar.getInstance().getTime();
+                    String todayAsString = df.format(today);
 
 
-                Boolean if_overhaul = GetOvh.isChecked();
-                DeviceOverhaulModel ovhModel = new DeviceOverhaulModel(deviceMaintananceRhs, device_maintanance_comment, if_overhaul, deviceFkey, todayAsString);
+                    Boolean if_overhaul = GetOvh.isChecked();
+                    DeviceOverhaulModel ovhModel = new DeviceOverhaulModel(deviceMaintananceRhs, device_maintanance_comment, if_overhaul, deviceFkey, todayAsString);
 
-                mdeviceId = getArguments().getString(deviceId);
+                    mdeviceId = getArguments().getString(deviceId);
 
-                DeviceModel deviceScanned = putOvhToDeviceFromQR(mdeviceId, ovhModel);
-                String fTxt = ovhModel.toString();
-                ListElementsArrayList.add(fTxt);
-                adapter.notifyDataSetChanged();
+                    DeviceModel deviceScanned = putOvhToDeviceFromQR(mdeviceId, ovhModel);
+                    String fTxt = ovhModel.toString();
+                    ListElementsArrayList.add(fTxt);
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 

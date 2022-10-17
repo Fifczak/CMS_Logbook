@@ -44,7 +44,7 @@ public class DeviceListFragment extends Fragment {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             Gson g = new Gson();
             DeviceModel[] deviceArray = g.fromJson(bufferedReader, DeviceModel[].class);
-
+            System.out.println(deviceArray);
             for (DeviceModel device : deviceArray) {
                 String imId = String.valueOf(device.getImId());
                 String deviceName = String.valueOf(device.getDeviceName());

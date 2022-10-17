@@ -4,6 +4,9 @@
     <external-files-path name="my_documents" path="Documents" />
     <external-files-path name="my_movies" path="Movies" />
     <external-files-path name="my_cmsdata" path="CMSData" />
+    <paths xmlns:android="http://schemas.android.com/apk/res/android">
+        <external-files-path name="my_images" path="Pictures" />
+    </paths>
     <external-path
         name="external"
         path="." />

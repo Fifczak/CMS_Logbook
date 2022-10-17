@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".Note">
+    tools:context=".NoteListFragment">
 
     <EditText
         android:id="@+id/editText2"
@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Enter value"
         android:textSize="15dp"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workParametersList" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -39,12 +39,13 @@
         android:layout_below="@+id/editText2"
         android:layout_marginTop="10dp"
         android:background="@drawable/gradient_background"
-        android:text="ADD Value"
+        android:text="@string/add_value"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
 
     <ListView
         android:id="@+id/workParametersList"
@@ -53,9 +54,10 @@
         android:layout_below="@+id/addButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addButton"></ListView>
+        app:layout_constraintTop_toBottomOf="@id/addButton"></ListView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,6 @@ public class Utils {
         InputStream inputStream = context.getAssets().open(filename);
 
         File outputFile = new File(context.getExternalFilesDir(destinationFolder), filename);
-        System.out.println(outputFile);
         OutputStream outputStream = new FileOutputStream(outputFile);
 
         byte[] buffer = new byte[1024];

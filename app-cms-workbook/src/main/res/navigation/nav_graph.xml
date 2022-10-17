@@ -119,14 +119,14 @@
         </fragment>
     <fragment
         android:id="@+id/repairHistoryFragment"
-        android:name="com.example.cms_logbook.RepairHistoryFragment"
+        android:name="com.example.cms_logbook.RepairHistoryListFragment"
         android:label="Repair history"
-        tools:layout="@layout/fragment_repair_history" />
+        tools:layout="@layout/fragment_repair_history_list" />
     <fragment
         android:id="@+id/addWorkParametersFragment"
-        android:name="com.example.cms_logbook.AddWorkParametersFragment"
+        android:name="com.example.cms_logbook.AddWorkParametersListFragment"
         android:label="Add parameter value"
-        tools:layout="@layout/fragment_add_work_parameters" />
+        tools:layout="@layout/fragment_add_work_parameters_list" />
     <fragment
         android:id="@+id/deviceManualFragment"
         android:name="com.example.cms_logbook.DeviceManualFragment"
@@ -134,9 +134,9 @@
         tools:layout="@layout/fragment_device_manual" />
     <fragment
         android:id="@+id/note"
-        android:name="com.example.cms_logbook.Note"
+        android:name="com.example.cms_logbook.NoteListFragment"
         android:label="Note"
-        tools:layout="@layout/fragment_note" />
+        tools:layout="@layout/fragment_note_list" />
     <fragment
         android:id="@+id/sync"
         android:name="com.example.cms_logbook.SyncFragment"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".Note">
+    tools:context=".NoteListFragment">
 
     <Button
         android:id="@+id/addNoteButton"
@@ -14,26 +14,50 @@
         android:layout_below="@+id/editText1"
         android:layout_centerHorizontal="true"
         android:background="@drawable/gradient_background"
-        android:text="Add Note"
+        android:text="@string/add_value"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camera_image_view" />
+
+    <ImageView
+        android:id="@+id/camera_image_view"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/camera"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText1" />
 
     <EditText
         android:id="@+id/editText1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Enter note"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addPhotoButton"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/addPhotoButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:src="@android:drawable/ic_menu_camera"
+        android:background="@drawable/gradient_background"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
@@ -46,6 +70,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addNoteButton"></ListView>
+        app:layout_constraintTop_toBottomOf="@id/addNoteButton">
+
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
