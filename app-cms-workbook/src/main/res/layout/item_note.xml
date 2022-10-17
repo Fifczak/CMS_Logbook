@@ -19,7 +19,7 @@
             android:id="@+id/note_img"
             android:layout_width="80dp"
             android:layout_height="50dp"
-            android:background="@android:drawable/ic_menu_gallery"  />
+            android:src="@android:drawable/ic_menu_gallery"  />
 
         <TextView
             android:id="@+id/note_text"

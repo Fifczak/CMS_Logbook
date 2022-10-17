@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -38,10 +40,10 @@ import db.NoteModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NoteFragment#newInstance} factory method to
+ * Use the {@link NoteListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NoteFragment extends Fragment {
+public class NoteListFragment extends Fragment {
 
     ListView listview;
     Button AddButton;
@@ -59,7 +61,7 @@ public class NoteFragment extends Fragment {
 
     private String mdeviceId;
 
-    public NoteFragment() {
+    public NoteListFragment() {
         // Required empty public constructor
     }
 
@@ -72,8 +74,8 @@ public class NoteFragment extends Fragment {
      * @return A new instance of fragment Note.
      */
     // TODO: Rename and change types and number of parameters
-    public static NoteFragment newInstance(String param1, String param2) {
-        NoteFragment fragment = new NoteFragment();
+    public static NoteListFragment newInstance(String param1, String param2) {
+        NoteListFragment fragment = new NoteListFragment();
         Bundle args = new Bundle();
         args.putString(deviceId, param1);
         fragment.setArguments(args);
@@ -92,7 +94,7 @@ public class NoteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_note, container, false);
+        return inflater.inflate(R.layout.fragment_note_list, container, false);
     }
 
     @Override
@@ -121,18 +123,23 @@ public class NoteFragment extends Fragment {
         AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tmpTxt = GetValue.getText().toString();
-                SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-                Date date = new Date(System.currentTimeMillis());
+                if( TextUtils.isEmpty(GetValue.getText())){
+                    Toast.makeText(getActivity(), "Note is required!", Toast.LENGTH_LONG).show();
+                } else{
+                    String tmpTxt = GetValue.getText().toString();
+                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                    Date date = new Date(System.currentTimeMillis());
 
-                mdeviceId = getArguments().getString(deviceId);
+                    mdeviceId = getArguments().getString(deviceId);
 
-                String fTxt = "[" + date + "]" + tmpTxt;
-                DeviceModel deviceScanned = putNoteToDeviceFromQR(mdeviceId, fTxt);
-                ListElements.add(new NoteModel(fTxt, PhotoString));
-                listview.setAdapter(arrayAdapter);
-                GetValue.setText("");
-                PhotoImage.setImageResource(R.drawable.camera);
+                    String fTxt = "[" + date + "]" + tmpTxt;
+                    DeviceModel deviceScanned = putNoteToDeviceFromQR(mdeviceId, fTxt);
+                    ListElements.add(new NoteModel(fTxt, PhotoString));
+                    listview.setAdapter(arrayAdapter);
+                    GetValue.setText("");
+                    PhotoImage.setImageResource(R.drawable.camera);
+                }
+
             }
         });
 
@@ -142,17 +149,14 @@ public class NoteFragment extends Fragment {
                 if (Objects.equals(Build.MODEL, "T21G")){
                     startActivityForResult(new Intent(view.getContext(), AddPhotoRWActivity.class), REQUEST_CODE);
                 } else {
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("deviceId", mdeviceId);
-//                    NavHostFragment.findNavController(DeviceMenuFragment.this)
-//                            .navigate(R.id.action_deviceMenuFragment_to_deviceManualFragment, bundle);
+                    startActivityForResult(new Intent(view.getContext(), AddPhotoActivity.class), REQUEST_CODE);
                 }
             }
         });
 
         }
 
-    private DeviceModel getDeviceFromQR(String qrId, NoteFragment context) {
+    private DeviceModel getDeviceFromQR(String qrId, NoteListFragment context) {
         DeviceModel deviceScanned;
         deviceScanned = new DeviceModel(null,null,null, null, null, null, null, null, null, null);
         try {
@@ -185,7 +189,9 @@ public class NoteFragment extends Fragment {
                     Bitmap PhotoBitMap = StringToBitMap(PhotoString);
                     PhotoImage.setImageBitmap(PhotoBitMap);
                 } else {
-
+                    PhotoString = data.getStringExtra(AddPhotoActivity.PhotoResult);
+                    Bitmap PhotoBitMap = StringToBitMap(PhotoString);
+                    PhotoImage.setImageBitmap(PhotoBitMap);
                 }
 
             }

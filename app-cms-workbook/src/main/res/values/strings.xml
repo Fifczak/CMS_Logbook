@@ -21,4 +21,5 @@
     <string name="camera_button_file_provider_photo">File Provider Photo</string>
     <string name="camera_button_basic_video">Basic Video</string>
     <string name="camera_button_file_provider_video">File Provider Video</string>
+    <string name="take_picture">Take Picture</string>
 </resources>

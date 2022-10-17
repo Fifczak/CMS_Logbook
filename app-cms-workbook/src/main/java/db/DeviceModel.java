@@ -107,9 +107,6 @@ public class DeviceModel {
         this.notes = notes;
         this.measurements = measurements;
         this.overhauls = overhauls;
-        System.out.println(deviceName);
-        System.out.println(overhauls);
-
 
     }
 }
