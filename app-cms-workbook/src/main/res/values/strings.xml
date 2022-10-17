@@ -16,4 +16,9 @@
     <string name="action_close_app">Close App </string>
     <string name="title_activity_sync">SyncActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="add_value">Create</string>
+    <string name="camera_button_bitmap_photo">Bitmap Photo</string>
+    <string name="camera_button_file_provider_photo">File Provider Photo</string>
+    <string name="camera_button_basic_video">Basic Video</string>
+    <string name="camera_button_file_provider_video">File Provider Video</string>
 </resources>

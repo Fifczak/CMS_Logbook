@@ -69,7 +69,6 @@ public class RemarksFragment extends Fragment {
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
         }
-        System.out.println(mdeviceId);
     }
 
     @Override

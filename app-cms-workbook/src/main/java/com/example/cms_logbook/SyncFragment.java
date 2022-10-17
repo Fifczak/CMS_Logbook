@@ -133,7 +133,6 @@ public class SyncFragment extends Fragment {
         binding.uploadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("UPLOAD TEST");
                 sendRequest();
             }
         });
@@ -229,7 +228,6 @@ public class SyncFragment extends Fragment {
             try {
                 JSONObject explrObject = jsonArray.getJSONObject(i); // you will get the json object
                 String filename = (explrObject.getString("imId")) + ".pdf";
-                System.out.println(filename);
                 downloadFile(filename);
             } catch (Exception e){
                 System.out.println(e);

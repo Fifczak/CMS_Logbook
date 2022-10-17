@@ -134,7 +134,7 @@
         tools:layout="@layout/fragment_device_manual" />
     <fragment
         android:id="@+id/note"
-        android:name="com.example.cms_logbook.Note"
+        android:name="com.example.cms_logbook.NoteFragment"
         android:label="Note"
         tools:layout="@layout/fragment_note" />
     <fragment

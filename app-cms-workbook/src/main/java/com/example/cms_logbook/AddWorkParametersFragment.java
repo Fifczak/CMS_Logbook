@@ -116,7 +116,6 @@ public class AddWorkParametersFragment extends Fragment {
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId);
             ArrayList<String> mdeviceMeasurements = deviceScanned.getMeasurements();
             for (String measurement : mdeviceMeasurements) {
-                System.out.println(measurement);
                 ListElements.add(measurement);
             }
         }
@@ -143,7 +142,6 @@ public class AddWorkParametersFragment extends Fragment {
                 mdeviceId = getArguments().getString(deviceId);
 
                 String fTxt = "[" + date + "]" + "[" + tmpTxt2 + "]" + tmpTxt;
-                System.out.println(formatter.format(date));
 
                 DeviceModel deviceScanned = putMeasurementToDeviceFromQR(mdeviceId, fTxt);
                 ListElementsArrayList.add(fTxt);

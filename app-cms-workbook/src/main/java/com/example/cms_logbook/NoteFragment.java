@@ -1,16 +1,25 @@
 package com.example.cms_logbook;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.Environment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -22,33 +31,35 @@ import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
 
 import db.DeviceModel;
+import db.NoteModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Note#newInstance} factory method to
+ * Use the {@link NoteFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Note extends Fragment {
-    ListView listview;
-    Button Addbutton;
-    EditText GetValue;
-    ArrayList<String> ListElements = new ArrayList<String>();
+public class NoteFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    ListView listview;
+    Button AddButton;
+    ImageButton addPhotoButton;
+    EditText GetValue;
+    ImageView PhotoImage;
+    ArrayList<NoteModel> ListElements = new ArrayList<NoteModel>();
+
+    public static String PhotoString = null;
+
+    private static final int REQUEST_CODE = 105;
     private static final String deviceId = "deviceId";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private String mdeviceId;
 
-    public Note() {
+    public NoteFragment() {
         // Required empty public constructor
     }
 
@@ -61,8 +72,8 @@ public class Note extends Fragment {
      * @return A new instance of fragment Note.
      */
     // TODO: Rename and change types and number of parameters
-    public static Note newInstance(String param1, String param2) {
-        Note fragment = new Note();
+    public static NoteFragment newInstance(String param1, String param2) {
+        NoteFragment fragment = new NoteFragment();
         Bundle args = new Bundle();
         args.putString(deviceId, param1);
         fragment.setArguments(args);
@@ -89,50 +100,59 @@ public class Note extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         listview = (ListView) view.findViewById(R.id.listView1);
-        Addbutton = (Button) view.findViewById(R.id.addNoteButton);
+        AddButton = (Button) view.findViewById(R.id.addNoteButton);
         GetValue = (EditText) view.findViewById(R.id.editText1);
-
+        addPhotoButton = (ImageButton) view.findViewById(R.id.addPhotoButton);
+        PhotoImage = (ImageView) view.findViewById(R.id.camera_image_view);
 
 
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId, this);
-            ArrayList<String> mdeviceNotes = deviceScanned.getNotes();
-            for (String note : mdeviceNotes) {
+            ArrayList<NoteModel> mdeviceNotes = deviceScanned.getNotes();
+            for (NoteModel note : mdeviceNotes) {
                 ListElements.add(note);
             }
         }
+        System.out.println(ListElements);
+        ArrayAdapter arrayAdapter = new NotesAdapter(view.getContext(), ListElements);
+        listview.setAdapter(arrayAdapter);
 
-        final List< String > ListElementsArrayList = new ArrayList< String >
-                (ListElements);
-
-
-        final ArrayAdapter< String > adapter = new ArrayAdapter < String >
-                (this.getContext(), android.R.layout.simple_list_item_1,
-                        ListElementsArrayList);
-
-        listview.setAdapter(adapter);
-
-        Addbutton.setOnClickListener(new View.OnClickListener() {
+        AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String tmpTxt = GetValue.getText().toString();
                 SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
                 Date date = new Date(System.currentTimeMillis());
-                System.out.println(formatter.format(date));
 
                 mdeviceId = getArguments().getString(deviceId);
 
                 String fTxt = "[" + date + "]" + tmpTxt;
                 DeviceModel deviceScanned = putNoteToDeviceFromQR(mdeviceId, fTxt);
-                ListElementsArrayList.add(fTxt);
-                adapter.notifyDataSetChanged();
+                ListElements.add(new NoteModel(fTxt, PhotoString));
+                listview.setAdapter(arrayAdapter);
+                GetValue.setText("");
+                PhotoImage.setImageResource(R.drawable.camera);
+            }
+        });
+
+        addPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Objects.equals(Build.MODEL, "T21G")){
+                    startActivityForResult(new Intent(view.getContext(), AddPhotoRWActivity.class), REQUEST_CODE);
+                } else {
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("deviceId", mdeviceId);
+//                    NavHostFragment.findNavController(DeviceMenuFragment.this)
+//                            .navigate(R.id.action_deviceMenuFragment_to_deviceManualFragment, bundle);
+                }
             }
         });
 
         }
 
-    private DeviceModel getDeviceFromQR(String qrId, Note context) {
+    private DeviceModel getDeviceFromQR(String qrId, NoteFragment context) {
         DeviceModel deviceScanned;
         deviceScanned = new DeviceModel(null,null,null, null, null, null, null, null, null, null);
         try {
@@ -154,6 +174,24 @@ public class Note extends Fragment {
         return deviceScanned;
     }
 
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                if (Objects.equals(Build.MODEL, "T21G")){
+                    PhotoString = data.getStringExtra(AddPhotoRWActivity.PhotoResult);
+                    Bitmap PhotoBitMap = StringToBitMap(PhotoString);
+                    PhotoImage.setImageBitmap(PhotoBitMap);
+                } else {
+
+                }
+
+            }
+        }
+    }
+
     private DeviceModel putNoteToDeviceFromQR(String qrId, String deviceNote) {
         DeviceModel deviceScanned;
         DeviceModel deviceScanned2;
@@ -169,7 +207,7 @@ public class Note extends Fragment {
                 String s = String.valueOf(device.getImId());
                 if (qrId.equals(s)) {
                     deviceScanned = device;
-                    deviceScanned.addNote(deviceNote);
+                    deviceScanned.addNote( new NoteModel(deviceNote, PhotoString));
                     Writer writer = new FileWriter(path);
                     g.toJson(deviceArray, writer);
                     writer.flush();
@@ -183,5 +221,20 @@ public class Note extends Fragment {
             System.out.println(e);
         }
         return deviceScanned;
+    }
+
+    /**
+     * @param encodedString
+     * @return bitmap (from given string)
+     */
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 }

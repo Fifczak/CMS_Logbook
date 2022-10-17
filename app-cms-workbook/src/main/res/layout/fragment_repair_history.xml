@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/commentInput"
-        android:layout_width="450dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -22,7 +22,7 @@
 
     <EditText
         android:id="@+id/rhsInput"
-        android:layout_width="450dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -30,6 +30,7 @@
         android:ems="10"
         android:hint="Enter RHS value"
         android:textSize="15dp"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rhsLabel"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +42,7 @@
         android:layout_below="@+id/rhsInput"
         android:layout_marginTop="15dp"
         android:background="@drawable/gradient_background"
-        android:text="ADD Value"
+        android:text="@string/add_value"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +73,7 @@
 
     <TextView
         android:id="@+id/rhsLabel"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/commentInput"
         android:layout_marginTop="15dp"
@@ -86,7 +87,7 @@
 
     <TextView
         android:id="@+id/overhaulLabel"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/rhsInput"
         android:layout_toStartOf="@+id/rhsInput"
@@ -99,7 +100,7 @@
 
     <TextView
         android:id="@+id/commentLabel"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/simpleSwitch"
         android:layout_toStartOf="@+id/simpleSwitch"

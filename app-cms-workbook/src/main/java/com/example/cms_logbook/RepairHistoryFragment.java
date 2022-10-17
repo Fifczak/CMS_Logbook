@@ -110,7 +110,6 @@ public class RepairHistoryFragment extends Fragment {
             for (DeviceOverhaulModel ovhModel : mdeviceOverhauls) {
                 ListElements.add(ovhModel.toString());
 
-                System.out.println(ovhModel.toString());
 
             }
         }

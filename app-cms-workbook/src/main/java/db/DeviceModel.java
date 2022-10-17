@@ -15,7 +15,7 @@ public class DeviceModel {
     private String reminderComment;
     private Integer imId;
     private String warningClass;
-    private ArrayList<String> notes;
+    private ArrayList<NoteModel> notes;
     private ArrayList<String> measurements;
     private ArrayList<DeviceOverhaulModel> overhauls;
     private int id;
@@ -63,7 +63,7 @@ public class DeviceModel {
         return id;
     }
 
-    public ArrayList<String> getNotes() {
+    public ArrayList<NoteModel> getNotes() {
         return notes;
     }
     public ArrayList<String> getMeasurements() {
@@ -73,7 +73,7 @@ public class DeviceModel {
         this.id = id;
     }
 
-    public void addNote(String note) {
+    public void addNote(NoteModel note) {
         this.notes.add(note);
     }
 
@@ -96,7 +96,7 @@ public class DeviceModel {
     }
 
     // constructor
-    public DeviceModel(Integer imId, String deviceName, String isoClass, String lastDate, String nextDate, String remark, String warningClass, ArrayList<String> notes, ArrayList<String> measurements, ArrayList<DeviceOverhaulModel> overhauls) {
+    public DeviceModel(Integer imId, String deviceName, String isoClass, String lastDate, String nextDate, String remark, String warningClass, ArrayList<NoteModel> notes, ArrayList<String> measurements, ArrayList<DeviceOverhaulModel> overhauls) {
         this.imId = imId;
         this.deviceName = deviceName;
         this.isoClass = isoClass;

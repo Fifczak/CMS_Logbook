@@ -43,7 +43,6 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String tokenText = tokenInput.getText().toString();
-                System.out.println(tokenText);
             }
         });
     }

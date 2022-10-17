@@ -17,6 +17,7 @@
         <entry key="app-cms-workbook/src/main/res/layout/activity_main.xml" value="0.4162763466042155" />
         <entry key="app-cms-workbook/src/main/res/layout/activity_settings.xml" value="0.335" />
         <entry key="app-cms-workbook/src/main/res/layout/activity_sync.xml" value="0.16056910569105692" />
+        <entry key="app-cms-workbook/src/main/res/layout/add_photo_rw_main.xml" value="0.5109223300970874" />
         <entry key="app-cms-workbook/src/main/res/layout/barcode_main.xml" value="0.5139563106796117" />
         <entry key="app-cms-workbook/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="app-cms-workbook/src/main/res/layout/content_settings.xml" value="0.1" />
@@ -34,6 +35,7 @@
         <entry key="app-cms-workbook/src/main/res/layout/fragment_start.xml" value="0.22" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_sync.xml" value="0.22" />
         <entry key="app-cms-workbook/src/main/res/layout/item_device.xml" value="0.33" />
+        <entry key="app-cms-workbook/src/main/res/layout/item_note.xml" value="0.5109223300970874" />
         <entry key="app-cms-workbook/src/main/res/menu/menu_main.xml" value="0.33" />
         <entry key="app-cms-workbook/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.199" />
         <entry key="app-cms-workbook/src/main/res/xml/file_paths.xml" value="0.31953125" />
