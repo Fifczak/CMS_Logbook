@@ -2,9 +2,12 @@ package com.example.cms_logbook;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +35,9 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,11 +125,17 @@ public class SyncFragment extends Fragment {
         binding.downloadStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.uploadDataButton.setEnabled(false);
-                binding.downloadStructureButton.setEnabled(false);
-                binding.downloadManualsButton.setEnabled(false);
-                binding.loadGif.setVisibility(View.VISIBLE);
-                getRequest();
+                Boolean if_internet = hasActiveInternetConnection(view.getContext());
+                if (if_internet){
+                    binding.uploadDataButton.setEnabled(false);
+                    binding.downloadStructureButton.setEnabled(false);
+                    binding.downloadManualsButton.setEnabled(false);
+                    binding.loadGif.setVisibility(View.VISIBLE);
+                    getRequest();
+                } else {
+                    Toast.makeText(getActivity(), "Check Your internet connection", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         binding.uploadDataButton.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +264,33 @@ public class SyncFragment extends Fragment {
         binding.uploadDataButton.setEnabled(true);
         binding.downloadStructureButton.setEnabled(true);
         binding.downloadManualsButton.setEnabled(true);
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
+
+    public static boolean hasActiveInternetConnection(Context context) {
+        if (isNetworkAvailable(context)) {
+            try {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
+                urlc.setRequestProperty("User-Agent", "Test");
+                urlc.setRequestProperty("Connection", "close");
+                urlc.setConnectTimeout(1500);
+                urlc.connect();
+                return (urlc.getResponseCode() == 200);
+            } catch (IOException e) {
+                System.out.println( "Error checking internet connection: " + e);
+            }
+        } else {
+            System.out.println("No network available!");
+        }
+        return false;
     }
 
 }
