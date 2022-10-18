@@ -110,12 +110,25 @@ public class SyncFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_start, container, false);
         slideLeft = AnimationUtils.loadAnimation(view.getContext(), R.anim.enter_anim);
         slideRight = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_from_right);
-        binding.uploadDataButton.clearAnimation();
-        binding.downloadStructureButton.clearAnimation();
-        binding.downloadManualsButton.clearAnimation();
-        binding.uploadDataButton.startAnimation(slideLeft);
-        binding.downloadStructureButton.startAnimation(slideRight);
-        binding.downloadManualsButton.startAnimation(slideLeft);
+
+        Boolean if_internet = hasActiveInternetConnection(view.getContext());
+        if (if_internet){
+            binding.uploadDataButton.setVisibility(View.VISIBLE);
+            binding.downloadStructureButton.setVisibility(View.VISIBLE);
+            binding.downloadManualsButton.setVisibility(View.VISIBLE);
+            binding.uploadDataButton.clearAnimation();
+            binding.downloadStructureButton.clearAnimation();
+            binding.downloadManualsButton.clearAnimation();
+            binding.uploadDataButton.startAnimation(slideLeft);
+            binding.downloadStructureButton.startAnimation(slideRight);
+            binding.downloadManualsButton.startAnimation(slideLeft);
+            binding.noInternetInfo.setVisibility(View.INVISIBLE);
+        } else {
+            binding.uploadDataButton.setVisibility(View.INVISIBLE);
+            binding.downloadStructureButton.setVisibility(View.INVISIBLE);
+            binding.downloadManualsButton.setVisibility(View.INVISIBLE);
+            binding.noInternetInfo.setVisibility(View.VISIBLE);
+        }
         return binding.getRoot();
     }
 
@@ -125,16 +138,11 @@ public class SyncFragment extends Fragment {
         binding.downloadStructureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Boolean if_internet = hasActiveInternetConnection(view.getContext());
-                if (if_internet){
-                    binding.uploadDataButton.setEnabled(false);
-                    binding.downloadStructureButton.setEnabled(false);
-                    binding.downloadManualsButton.setEnabled(false);
-                    binding.loadGif.setVisibility(View.VISIBLE);
-                    getRequest();
-                } else {
-                    Toast.makeText(getActivity(), "Check Your internet connection", Toast.LENGTH_LONG).show();
-                }
+                binding.uploadDataButton.setEnabled(false);
+                binding.downloadStructureButton.setEnabled(false);
+                binding.downloadManualsButton.setEnabled(false);
+                binding.loadGif.setVisibility(View.VISIBLE);
+                getRequest();
 
             }
         });
