@@ -1,6 +1,8 @@
 package com.example.cms_logbook;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -23,7 +25,6 @@ public class CameraRWActivity extends Activity implements QRCodeImageAnalysis.Qr
     private static final String EXTRA_CODE_DM = "com.realwear.barcodereader.intent.extra.CODE_DM";
     private static final String EXTRA_CODE_EAN_UPC = "com.realwear.barcodereader.intent.extra.CODE_EAN_UPC";
     private static final String EXTRA_CODE_QR = "com.realwear.barcodereader.intent.extra.CODE_QR";
-
 
     /**
      * Called when the activity is created
@@ -75,6 +76,9 @@ public class CameraRWActivity extends Activity implements QRCodeImageAnalysis.Qr
                 result = data.getStringExtra(EXTRA_RESULT);
                 onQrCodeDetected(result);
             }
+        } else if(resultCode == 0){
+            finish();
         }
     }
+
 }

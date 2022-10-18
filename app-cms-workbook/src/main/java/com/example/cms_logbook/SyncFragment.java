@@ -56,10 +56,6 @@ public class SyncFragment extends Fragment {
     private static final String deviceId = "deviceId";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private String mdeviceId;
 
     public SyncFragment() {
@@ -231,7 +227,6 @@ public class SyncFragment extends Fragment {
                 downloadFile(filename);
             } catch (Exception e){
                 System.out.println(e);
-
             }
             //do the stuff
         }

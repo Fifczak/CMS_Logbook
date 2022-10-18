@@ -10,10 +10,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.UUID;
@@ -148,8 +146,10 @@ public class AddPhotoRWActivity extends Activity {
             intent.putExtra(PhotoResult, PhotoString);
             setResult(Activity.RESULT_OK, intent);
             finish();
-            }
+        } else if(resultCode == 0){
+            finish();
         }
+    }
 
     public String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();

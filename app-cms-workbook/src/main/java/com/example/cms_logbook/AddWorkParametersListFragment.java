@@ -41,14 +41,9 @@ public class AddWorkParametersListFragment extends Fragment {
 
     ArrayList<String> ListElements = new ArrayList<String>();
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     private static final String deviceId = "deviceId";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private Spinner spinner;
     private static final String[] paths = {"RHs", "RPM", "PRESSURE", "TEMP"};
