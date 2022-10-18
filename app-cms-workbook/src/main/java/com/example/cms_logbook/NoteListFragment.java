@@ -127,7 +127,7 @@ public class NoteListFragment extends Fragment {
                     Toast.makeText(getActivity(), "Note is required!", Toast.LENGTH_LONG).show();
                 } else{
                     String tmpTxt = GetValue.getText().toString();
-                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
                     Date date = new Date(System.currentTimeMillis());
 
                     mdeviceId = getArguments().getString(deviceId);
