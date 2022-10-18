@@ -112,11 +112,11 @@ public class NoteListFragment extends Fragment {
             mdeviceId = getArguments().getString(deviceId);
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId, this);
             ArrayList<NoteModel> mdeviceNotes = deviceScanned.getNotes();
+            ListElements = new ArrayList<NoteModel>();
             for (NoteModel note : mdeviceNotes) {
                 ListElements.add(note);
             }
         }
-        System.out.println(ListElements);
         ArrayAdapter arrayAdapter = new NotesAdapter(view.getContext(), ListElements);
         listview.setAdapter(arrayAdapter);
 
