@@ -43,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {} else {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
+
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.NFC) == PackageManager.PERMISSION_GRANTED) {} else {
+            requestPermissions(new String[]{Manifest.permission.NFC}, 1);
+        }
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

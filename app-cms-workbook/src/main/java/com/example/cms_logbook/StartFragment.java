@@ -2,6 +2,7 @@ package com.example.cms_logbook;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,8 +20,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.cms_logbook.databinding.FragmentStartBinding;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Objects;
+import android.provider.Settings.Secure;
 
 public class StartFragment extends Fragment {
 
@@ -49,28 +54,64 @@ public class StartFragment extends Fragment {
         binding.buttonQrCode.clearAnimation();
         binding.buttonSelectMachine.startAnimation(slideLeft);
         binding.buttonQrCode.startAnimation(slideRight);
+
+
+
+
+
+
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(StartFragment.this)
-                        .navigate(R.id.action_startFragment_to_deviceListFragment);
-            }
-        });
-        binding.buttonQrCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Objects.equals(Build.MODEL, "T21G")){
-                    startActivityForResult(new Intent(view.getContext(), CameraRWActivity.class), REQUEST_CODE);
-                } else {
-                    startActivityForResult(new Intent(view.getContext(), CameraActivity.class), REQUEST_CODE);
+
+        TokenHandler tokenHandler = new TokenHandler();
+        File basePath = getContext().getExternalFilesDir("CMSData");
+        String activationToken = tokenHandler.readActivationTokenFromFile(basePath);
+
+
+
+        ContentResolver context = getContext().getContentResolver();
+        Boolean access = tokenHandler.checkActivationToken(activationToken, context);
+
+        if (access == Boolean.TRUE) {
+            binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    NavHostFragment.findNavController(StartFragment.this)
+                            .navigate(R.id.action_startFragment_to_deviceListFragment);
                 }
-            }
-        });
+            });
+            binding.buttonQrCode.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (Objects.equals(Build.MODEL, "T21G")) {
+                        startActivityForResult(new Intent(view.getContext(), CameraRWActivity.class), REQUEST_CODE);
+                    } else {
+                        startActivityForResult(new Intent(view.getContext(), CameraActivity.class), REQUEST_CODE);
+                    }
+                }
+            });
+        }else{
+            String no_access = "No valid token. Please contact with office@cm-solution.tech";
+            binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
+                }
+            });
+            binding.buttonQrCode.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
+                }
+            });
+        }
+
+
     }
 
     @SuppressLint("ResourceAsColor")

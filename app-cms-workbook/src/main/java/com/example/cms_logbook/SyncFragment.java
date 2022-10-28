@@ -29,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cms_logbook.databinding.FragmentSyncBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -142,22 +143,26 @@ public class SyncFragment extends Fragment {
                 binding.downloadStructureButton.setEnabled(false);
                 binding.downloadManualsButton.setEnabled(false);
                 binding.loadGif.setVisibility(View.VISIBLE);
-                getRequest();
+                getRequest(view);
 
             }
         });
         binding.uploadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendRequest();
+                sendRequest(view);
             }
         });
     }
 
 
-    public List<JSONArray> getRequest(){
+    public List<JSONArray> getRequest(View v){
+        TokenHandler tokenHandler = new TokenHandler();
+        File basePath = getContext().getExternalFilesDir("CMSData");
+        String authToken = tokenHandler.readAuthTokenFromFile(basePath);
+
         RequestQueue volleyQueue = Volley.newRequestQueue(this.getContext());
-        String url = "https://api.info-marine.com/api/sync/qrdata/21";
+        String url = "https://api.info-marine.com/api/sync/qrdata/" + authToken;
         JSONArray devices_list = null;
         List<JSONArray> reponse_l = new ArrayList<>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -170,7 +175,9 @@ public class SyncFragment extends Fragment {
                     } finally{}
                 },
                 (Response.ErrorListener) error -> {
-                       Log.e("MainActivity", error.toString());
+                    String no_access = "Authorization failed. Please check auth token.";
+                    Snackbar mySnackbar = Snackbar.make(v, no_access, Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
                 }
         ){
             /**
@@ -180,7 +187,7 @@ public class SyncFragment extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json");
-                headers.put("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
+                headers.put("apikey", authToken);
                 return headers;
             }
         };
@@ -192,7 +199,12 @@ public class SyncFragment extends Fragment {
     }
 
 
-    private void sendRequest() {
+    private void sendRequest(View v) {
+        TokenHandler tokenHandler = new TokenHandler();
+        File basePath = getContext().getExternalFilesDir("CMSData");
+        String authToken = tokenHandler.readAuthTokenFromFile(basePath);
+
+
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         String url = "https://api.info-marine.com/api/sync/send_qrdata";
         JSONArray jsonObjectArray = new JSONArray();
@@ -216,7 +228,11 @@ public class SyncFragment extends Fragment {
                     } finally{}
                 },
                 (Response.ErrorListener) error -> {
-                    Log.e("MainActivity", error.toString());
+                    if (error.toString().contains("AuthFailureError")){
+                        String no_access = "Authorization failed. Please check auth token.";
+                        Snackbar mySnackbar = Snackbar.make(v, no_access, Snackbar.LENGTH_LONG);
+                        mySnackbar.show();
+                    }
                 }
         ) {
             /**
@@ -226,7 +242,7 @@ public class SyncFragment extends Fragment {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json");
-                headers.put("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
+                headers.put("apikey", authToken);
                 return headers;
             }
         };
@@ -257,6 +273,11 @@ public class SyncFragment extends Fragment {
     }
 
     public void downloadFile(String filename){
+
+        TokenHandler tokenHandler = new TokenHandler();
+        File basePath = getContext().getExternalFilesDir("CMSData");
+        String authToken = tokenHandler.readAuthTokenFromFile(basePath);
+
         File file = new File(getContext().getExternalFilesDir("CMSData") + "/" + filename);
         boolean deleted = file.delete();
         DownloadManager downloadmanager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
@@ -264,7 +285,7 @@ public class SyncFragment extends Fragment {
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setTitle(filename);
         request.setDescription("Downloading");
-        request.addRequestHeader("apikey", "7B5zIqmRGXmrJTFmKa99vcit");
+        request.addRequestHeader("apikey", authToken);
         request.setVisibleInDownloadsUi(false);
         request.setDestinationInExternalFilesDir(getContext(), "/CMSData/", filename);
         downloadmanager.enqueue(request);
