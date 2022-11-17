@@ -135,12 +135,12 @@ public class AddWorkParametersListFragment extends Fragment {
                     String tmpTxt = GetValue.getText().toString();
                     String tmpTxt2 = GetTask.getSelectedItem().toString();
 
-                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Date date = new Date(System.currentTimeMillis());
 
                     mdeviceId = getArguments().getString(deviceId);
 
-                    String fTxt = "[" + date + "]" + "[" + tmpTxt2 + "]" + tmpTxt;
+                    String fTxt = "[" + formatter.format(date)  + "]" + "[" + tmpTxt2 + "]" + tmpTxt;
 
                     DeviceModel deviceScanned = putMeasurementToDeviceFromQR(mdeviceId, fTxt);
                     ListElementsArrayList.add(fTxt);

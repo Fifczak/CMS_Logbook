@@ -131,12 +131,11 @@ public class NoteListFragment extends Fragment {
                     Toast.makeText(getActivity(), "Note is required!", Toast.LENGTH_LONG).show();
                 } else{
                     String tmpTxt = GetValue.getText().toString();
-                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Date date = new Date(System.currentTimeMillis());
 
                     mdeviceId = getArguments().getString(deviceId);
-
-                    String fTxt = "[" + date + "]" + tmpTxt;
+                    String fTxt = "[" + formatter.format(date) + "]" + tmpTxt;
                     DeviceModel deviceScanned = putNoteToDeviceFromQR(mdeviceId, fTxt);
                     ListElements.add(new NoteModel(fTxt, PhotoString));
                     listview.setAdapter(arrayAdapter);
