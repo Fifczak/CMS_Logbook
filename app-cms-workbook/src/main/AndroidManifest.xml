@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.cms_logbook">
+    package="com.cms.cms_logbook">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
@@ -30,17 +29,17 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="31">
         <activity
-            android:name="com.example.cms_logbook.SettingsActivity"
+            android:name="com.cms.cms_logbook.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
         <activity
-            android:name="com.example.cms_logbook.SyncActivity"
+            android:name="com.cms.cms_logbook.SyncActivity"
             android:exported="false"
             android:label="@string/title_activity_sync"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
         <activity
-            android:name="com.example.cms_logbook.MainActivity"
+            android:name="com.cms.cms_logbook.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication.NoActionBar">
@@ -51,32 +50,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.cms_logbook.CameraActivity"
+            android:name="com.cms.cms_logbook.CameraActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication.NoActionBar">
         </activity>
         <activity
-            android:name="com.example.cms_logbook.CameraRWActivity"
+            android:name="com.cms.cms_logbook.CameraRWActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication.NoActionBar">
         </activity>
         <activity
-            android:name="com.example.cms_logbook.DocumentActivity"
+            android:name="com.cms.cms_logbook.DocumentActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:noHistory = "true"
             android:theme="@style/Theme.MyApplication.NoActionBar">
         </activity>
         <activity
-            android:name="com.example.cms_logbook.AddPhotoRWActivity"
+            android:name="com.cms.cms_logbook.AddPhotoRWActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication.NoActionBar">
         </activity>
         <activity
-            android:name="com.example.cms_logbook.AddPhotoActivity"
+            android:name="com.cms.cms_logbook.AddPhotoActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication.NoActionBar">

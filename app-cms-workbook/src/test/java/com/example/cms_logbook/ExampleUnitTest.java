@@ -1,4 +1,4 @@
-package com.example.cms_logbook;
+package com.cms.cms_logbook;
 
 import org.junit.Test;
 

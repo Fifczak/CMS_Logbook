@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.cms_logbook"
+        applicationId "com.cms.cms_logbook"
         minSdk 28
         targetSdk 32
         versionCode 2
