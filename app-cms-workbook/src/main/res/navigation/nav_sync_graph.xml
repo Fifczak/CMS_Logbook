@@ -6,7 +6,7 @@
     app:startDestination="@id/sync2">
     <fragment
         android:id="@+id/sync2"
-        android:name="com.example.cms_logbook.SyncFragment"
+        android:name="com.cms.cms_logbook.SyncFragment"
         android:label="Sync"
         tools:layout="@layout/fragment_sync" />
 </navigation>
