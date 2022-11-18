@@ -116,11 +116,11 @@ public class NoteListFragment extends Fragment {
             mdeviceId = getArguments().getString(deviceId);
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId, this);
             ArrayList<NoteModel> mdeviceNotes = deviceScanned.getNotes();
+            ListElements = new ArrayList<NoteModel>();
             for (NoteModel note : mdeviceNotes) {
                 ListElements.add(note);
             }
         }
-        System.out.println(ListElements);
         ArrayAdapter arrayAdapter = new NotesAdapter(view.getContext(), ListElements);
         listview.setAdapter(arrayAdapter);
 
@@ -131,7 +131,7 @@ public class NoteListFragment extends Fragment {
                     Toast.makeText(getActivity(), "Note is required!", Toast.LENGTH_LONG).show();
                 } else{
                     String tmpTxt = GetValue.getText().toString();
-                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
                     Date date = new Date(System.currentTimeMillis());
 
                     mdeviceId = getArguments().getString(deviceId);

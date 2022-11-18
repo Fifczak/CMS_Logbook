@@ -136,10 +136,34 @@
         android:id="@+id/note"
         android:name="com.cms.cms_logbook.NoteListFragment"
         android:label="Note"
-        tools:layout="@layout/fragment_note_list" />
+        tools:layout="@layout/fragment_note_list" >
+        <action
+            android:id="@+id/action_note_to_noteDetailsFragment"
+            app:destination="@id/noteDetailsFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim"/>
+    </fragment>
     <fragment
         android:id="@+id/sync"
         android:name="com.cms.cms_logbook.SyncFragment"
         android:label="Sync"
         tools:layout="@layout/fragment_sync" />
+    <fragment
+        android:id="@+id/noteDetailsFragment"
+        android:name="com.example.cms_logbook.NoteDetailsFragment"
+        android:label="fragment_note_details"
+        tools:layout="@layout/fragment_note_details" >
+        <argument
+            android:name="note_text"
+            app:argType="string" />
+        <argument
+            android:name="note_img"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="note_position"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -20,7 +20,8 @@ import db.NoteModel;
 
 public class NotesAdapter extends ArrayAdapter<NoteModel> {
 
-
+    public String note_text;
+    public String note_img;
 
     public NotesAdapter(Context context, ArrayList<NoteModel> users) {
         super(context, 0, users);
@@ -33,7 +34,7 @@ public class NotesAdapter extends ArrayAdapter<NoteModel> {
         }
         TextView noteText = (TextView) convertView.findViewById(R.id.note_text);
         ImageView noteImg = (ImageView) convertView.findViewById(R.id.note_img);
-        LinearLayout linearDevice = (LinearLayout) convertView.findViewById(R.id.linearDevice);
+        LinearLayout linearNote = (LinearLayout) convertView.findViewById(R.id.linearDevice);
         noteText.setText(note.note_text);
         if (note.note_img != null){
             Bitmap PhotoBitMap = StringToBitMap(note.note_img);
@@ -42,7 +43,17 @@ public class NotesAdapter extends ArrayAdapter<NoteModel> {
             noteImg.setVisibility(View.INVISIBLE);
         }
 
-        linearDevice.setTag(position);
+        linearNote.setTag(position);
+        linearNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = (Integer) view.getTag();
+                NoteModel note = getItem(position);
+                note_text = note.note_text;
+                note_img = note.note_img;
+                Navigation.findNavController(view).navigate(NoteListFragmentDirections.actionNoteToNoteDetailsFragment(note_text, note_img, position));
+            }
+        });
 
 
         return convertView;

@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import db.NoteModel;
+
 /**
  * Activity responsible for requesting camera permission, starting camera and returning scanned QR
  * code as a result.
@@ -33,6 +35,7 @@ public class AddPhotoActivity extends AppCompatActivity {
 
     public static final String PhotoResult = "";
     String currentPhotoPath;
+    NoteModel note;
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
@@ -109,8 +112,8 @@ public class AddPhotoActivity extends AppCompatActivity {
 
     private Bitmap setPic() {
         // Get the dimensions of the View
-        int targetW = 200;
-        int targetH = 200;
+        int targetW = 300;
+        int targetH = 300;
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
