@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.cms_logbook.StartFragment"
-        android:label="CMS logbook"
+        android:name="com.cms.cms_logbook.StartFragment"
+        android:label="Smart logbook"
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment_to_deviceListFragment"
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/deviceListFragment"
-        android:name="com.example.cms_logbook.DeviceListFragment"
+        android:name="com.cms.cms_logbook.DeviceListFragment"
         android:label="Devices list"
         tools:layout="@layout/fragment_device_list" >
         <action
@@ -48,12 +48,12 @@
     </fragment>
     <activity
         android:id="@+id/cameraActivity"
-        android:name="com.example.cms_logbook.CameraActivity"
+        android:name="com.cms.cms_logbook.CameraActivity"
         android:label="fragment_qr_scanner"
         tools:layout="@layout/activiti_camera" />
     <fragment
         android:id="@+id/deviceMenuFragment"
-        android:name="com.example.cms_logbook.DeviceMenuFragment"
+        android:name="com.cms.cms_logbook.DeviceMenuFragment"
         android:label="Device menu"
         tools:layout="@layout/fragment_device_menu" >
         <argument
@@ -107,7 +107,7 @@
     </fragment>
     <fragment
         android:id="@+id/remarksFragment"
-        android:name="com.example.cms_logbook.RemarksFragment"
+        android:name="com.cms.cms_logbook.RemarksFragment"
         android:label="Device remarks"
         tools:layout="@layout/fragment_remarks">
         <argument
@@ -119,22 +119,22 @@
         </fragment>
     <fragment
         android:id="@+id/repairHistoryFragment"
-        android:name="com.example.cms_logbook.RepairHistoryListFragment"
+        android:name="com.cms.cms_logbook.RepairHistoryListFragment"
         android:label="Repair history"
         tools:layout="@layout/fragment_repair_history_list" />
     <fragment
         android:id="@+id/addWorkParametersFragment"
-        android:name="com.example.cms_logbook.AddWorkParametersListFragment"
+        android:name="com.cms.cms_logbook.AddWorkParametersListFragment"
         android:label="Add parameter value"
         tools:layout="@layout/fragment_add_work_parameters_list" />
     <fragment
         android:id="@+id/deviceManualFragment"
-        android:name="com.example.cms_logbook.DeviceManualFragment"
+        android:name="com.cms.cms_logbook.DeviceManualFragment"
         android:label="Device manual"
         tools:layout="@layout/fragment_device_manual" />
     <fragment
         android:id="@+id/note"
-        android:name="com.example.cms_logbook.NoteListFragment"
+        android:name="com.cms.cms_logbook.NoteListFragment"
         android:label="Note"
         tools:layout="@layout/fragment_note_list" >
         <action
@@ -147,7 +147,7 @@
     </fragment>
     <fragment
         android:id="@+id/sync"
-        android:name="com.example.cms_logbook.SyncFragment"
+        android:name="com.cms.cms_logbook.SyncFragment"
         android:label="Sync"
         tools:layout="@layout/fragment_sync" />
     <fragment
