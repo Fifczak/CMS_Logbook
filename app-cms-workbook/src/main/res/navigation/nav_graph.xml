@@ -152,8 +152,8 @@
         tools:layout="@layout/fragment_sync" />
     <fragment
         android:id="@+id/noteDetailsFragment"
-        android:name="com.example.cms_logbook.NoteDetailsFragment"
-        android:label="fragment_note_details"
+        android:name="com.cms.cms_logbook.NoteDetailsFragment"
+        android:label="Note Details"
         tools:layout="@layout/fragment_note_details" >
         <argument
             android:name="note_text"
@@ -165,5 +165,8 @@
         <argument
             android:name="note_position"
             app:argType="integer" />
+        <argument
+            android:name="deviceId"
+            app:argType="string" />
     </fragment>
 </navigation>

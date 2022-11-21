@@ -73,9 +73,9 @@ public class StartFragment extends Fragment {
 
 
         ContentResolver context = getContext().getContentResolver();
-        Boolean access = tokenHandler.checkActivationToken(activationToken, context);
+        Integer access = tokenHandler.checkActivationToken(activationToken, context);
 
-        if (access == Boolean.TRUE) {
+        if (access == 0) {
             binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -93,8 +93,24 @@ public class StartFragment extends Fragment {
                     }
                 }
             });
-        }else{
+        }else if(access == 1){
             String no_access = "No valid token. Please contact with office@cm-solution.tech";
+            binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
+                }
+            });
+            binding.buttonQrCode.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
+                }
+            });
+        } else {
+            String no_access = "The token has expired. Please contact with office@cm-solution.tech";
             binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

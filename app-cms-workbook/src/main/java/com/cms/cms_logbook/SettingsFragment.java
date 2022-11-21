@@ -191,8 +191,8 @@ public class SettingsFragment extends Fragment {
                 TokenHandler tokenHandler = new TokenHandler();
                 String path = getContext().getExternalFilesDir("CMSData") + "/activationToken.json";
                 ContentResolver context = getContext().getContentResolver();
-                Boolean tokenValid = tokenHandler.checkActivationToken(tokenText, context);
-                if (tokenValid == Boolean.TRUE) {
+                int tokenValid = tokenHandler.checkActivationToken(tokenText, context);
+                if (tokenValid == 0) {
                     Snackbar mySnackbar = Snackbar.make(view,
                             "Token active", Snackbar.LENGTH_LONG);
                     mySnackbar.show();
