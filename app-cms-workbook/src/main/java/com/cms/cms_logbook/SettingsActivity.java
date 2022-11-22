@@ -1,5 +1,6 @@
 package com.cms.cms_logbook;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,6 +16,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.cms.cms_logbook.databinding.ActivitySettingsBinding;
 
+import java.io.File;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -28,7 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_settings);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -44,15 +46,6 @@ public class SettingsActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent intent = new Intent(getBaseContext(), FragmentActivity.class);
-            startActivity(intent);
 
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 
 }

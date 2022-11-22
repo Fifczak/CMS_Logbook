@@ -31,11 +31,13 @@
         <activity
             android:name="com.cms.cms_logbook.SettingsActivity"
             android:exported="false"
+            android:parentActivityName="com.cms.cms_logbook.MainActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
         <activity
             android:name="com.cms.cms_logbook.SyncActivity"
             android:exported="false"
+            android:parentActivityName="com.cms.cms_logbook.MainActivity"
             android:label="@string/title_activity_sync"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
         <activity
