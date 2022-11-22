@@ -68,8 +68,6 @@ public class StartFragment extends Fragment {
         File basePath = getContext().getExternalFilesDir("CMSData");
         String activationToken = tokenHandler.readActivationTokenFromFile(basePath);
 
-
-
         ContentResolver context = getContext().getContentResolver();
         access = tokenHandler.checkActivationToken(activationToken, context);
 
@@ -127,7 +125,6 @@ public class StartFragment extends Fragment {
                     devName = "Trzeba zrobić z jsona"; // data.getStringExtra(CameraActivity.QR_SCAN_RESULT);
                 }
 
-
                 Navigation.findNavController(binding.getRoot()).navigate(StartFragmentDirections.actionStartFragmentToDeviceMenuFragment(devId, devName));
             }
         }
@@ -137,16 +134,6 @@ public class StartFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        TokenHandler tokenHandler = new TokenHandler();
-        File basePath = getContext().getExternalFilesDir("CMSData");
-        String activationToken = tokenHandler.readActivationTokenFromFile(basePath);
-        ContentResolver context = getContext().getContentResolver();
-        access = tokenHandler.checkActivationToken(activationToken, context);
     }
 
 }

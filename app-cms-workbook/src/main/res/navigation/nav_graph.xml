@@ -3,170 +3,177 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/navigation">
 
-    <fragment
-        android:id="@+id/startFragment"
-        android:name="com.cms.cms_logbook.StartFragment"
-        android:label="Smart logbook"
-        tools:layout="@layout/fragment_start" >
-        <action
-            android:id="@+id/action_startFragment_to_deviceListFragment"
-            app:destination="@id/deviceListFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-        <action
-            android:id="@+id/action_startFragment_to_cameraActivity"
-            app:destination="@id/cameraActivity"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-        <action
-            android:id="@+id/action_startFragment_to_deviceMenuFragment"
-            app:destination="@id/deviceMenuFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-
-    </fragment>
-    <fragment
-        android:id="@+id/deviceListFragment"
-        android:name="com.cms.cms_logbook.DeviceListFragment"
-        android:label="Devices list"
-        tools:layout="@layout/fragment_device_list" >
-        <action
-            android:id="@+id/action_deviceListFragment_to_deviceMenuFragment"
-            app:destination="@id/deviceMenuFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-    </fragment>
-    <activity
-        android:id="@+id/cameraActivity"
-        android:name="com.cms.cms_logbook.CameraActivity"
-        android:label="fragment_qr_scanner"
-        tools:layout="@layout/activiti_camera" />
-    <fragment
-        android:id="@+id/deviceMenuFragment"
-        android:name="com.cms.cms_logbook.DeviceMenuFragment"
-        android:label="Device menu"
-        tools:layout="@layout/fragment_device_menu" >
-        <argument
-            android:name="deviceId"
-            app:argType="string" />
-        <argument
-            android:name="deviceName"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_deviceMenuFragment_to_remarksFragment"
-            app:destination="@id/remarksFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-        <action
-            android:id="@+id/action_deviceMenuFragment_to_repairHistoryFragment"
-            app:destination="@id/repairHistoryFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-        <action
-            android:id="@+id/action_deviceMenuFragment_to_addWorkParametersFragment"
-            app:destination="@id/addWorkParametersFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-        <action
-            android:id="@+id/action_deviceMenuFragment_to_deviceManualFragment"
-            app:destination="@id/deviceManualFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-        <action
-            android:id="@+id/action_deviceMenuFragment_to_note"
-            app:destination="@id/note"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-        <action
-            android:id="@+id/action_deviceMenuFragment_to_sync"
-            app:destination="@id/sync"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-    </fragment>
-    <fragment
-        android:id="@+id/remarksFragment"
-        android:name="com.cms.cms_logbook.RemarksFragment"
-        android:label="Device remarks"
-        tools:layout="@layout/fragment_remarks">
-        <argument
-            android:name="deviceId"
-            app:argType="string" />
-        <argument
-            android:name="deviceName"
-            app:argType="string" />
+    <navigation android:id="@+id/navigation"
+        app:startDestination="@id/startFragment">
+        <fragment
+            android:id="@+id/deviceMenuFragment"
+            android:name="com.cms.cms_logbook.DeviceMenuFragment"
+            android:label="Device menu"
+            tools:layout="@layout/fragment_device_menu">
+            <argument
+                android:name="deviceId"
+                app:argType="string" />
+            <argument
+                android:name="deviceName"
+                app:argType="string" />
+            <action
+                android:id="@+id/action_deviceMenuFragment_to_remarksFragment"
+                app:destination="@id/remarksFragment"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+            <action
+                android:id="@+id/action_deviceMenuFragment_to_repairHistoryFragment"
+                app:destination="@id/repairHistoryFragment"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+            <action
+                android:id="@+id/action_deviceMenuFragment_to_addWorkParametersFragment"
+                app:destination="@id/addWorkParametersFragment"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+            <action
+                android:id="@+id/action_deviceMenuFragment_to_deviceManualFragment"
+                app:destination="@id/deviceManualFragment"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+            <action
+                android:id="@+id/action_deviceMenuFragment_to_note"
+                app:destination="@id/note"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+            <action
+                android:id="@+id/action_deviceMenuFragment_to_sync"
+                app:destination="@id/sync"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
         </fragment>
-    <fragment
-        android:id="@+id/repairHistoryFragment"
-        android:name="com.cms.cms_logbook.RepairHistoryListFragment"
-        android:label="Repair history"
-        tools:layout="@layout/fragment_repair_history_list" />
-    <fragment
-        android:id="@+id/addWorkParametersFragment"
-        android:name="com.cms.cms_logbook.AddWorkParametersListFragment"
-        android:label="Add parameter value"
-        tools:layout="@layout/fragment_add_work_parameters_list" />
-    <fragment
-        android:id="@+id/deviceManualFragment"
-        android:name="com.cms.cms_logbook.DeviceManualFragment"
-        android:label="Device manual"
-        tools:layout="@layout/fragment_device_manual" />
-    <fragment
-        android:id="@+id/note"
-        android:name="com.cms.cms_logbook.NoteListFragment"
-        android:label="Note"
-        tools:layout="@layout/fragment_note_list" >
+        <fragment
+            android:id="@+id/addWorkParametersFragment"
+            android:name="com.cms.cms_logbook.AddWorkParametersListFragment"
+            android:label="Add parameter value"
+            tools:layout="@layout/fragment_add_work_parameters_list" />
+        <fragment
+            android:id="@+id/deviceManualFragment"
+            android:name="com.cms.cms_logbook.DeviceManualFragment"
+            android:label="Device manual"
+            tools:layout="@layout/fragment_device_manual" />
+        <fragment
+            android:id="@+id/note"
+            android:name="com.cms.cms_logbook.NoteListFragment"
+            android:label="Note"
+            tools:layout="@layout/fragment_note_list">
+            <action
+                android:id="@+id/action_note_to_noteDetailsFragment"
+                app:destination="@id/noteDetailsFragment"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/sync"
+            android:name="com.cms.cms_logbook.SyncFragment"
+            android:label="Sync"
+            tools:layout="@layout/fragment_sync" />
+        <fragment
+            android:id="@+id/deviceListFragment"
+            android:name="com.cms.cms_logbook.DeviceListFragment"
+            android:label="Devices list"
+            tools:layout="@layout/fragment_device_list">
+            <action
+                android:id="@+id/action_deviceListFragment_to_deviceMenuFragment"
+                app:destination="@id/deviceMenuFragment"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/repairHistoryFragment"
+            android:name="com.cms.cms_logbook.RepairHistoryListFragment"
+            android:label="Repair history"
+            tools:layout="@layout/fragment_repair_history_list" />
+        <fragment
+            android:id="@+id/startFragment"
+            android:name="com.cms.cms_logbook.StartFragment"
+            android:label="Smart logbook"
+            tools:layout="@layout/fragment_start">
+            <action
+                android:id="@+id/action_startFragment_to_deviceListFragment"
+                app:destination="@id/deviceListFragment"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+            <action
+                android:id="@+id/action_startFragment_to_cameraActivity"
+                app:destination="@id/cameraActivity"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+            <action
+                android:id="@+id/action_startFragment_to_deviceMenuFragment"
+                app:destination="@id/deviceMenuFragment"
+                app:enterAnim="@anim/enter_anim"
+                app:exitAnim="@anim/exit_anim"
+                app:popEnterAnim="@anim/pop_enter_anim"
+                app:popExitAnim="@anim/pop_exit_anim" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/remarksFragment"
+            android:name="com.cms.cms_logbook.RemarksFragment"
+            android:label="Device remarks"
+            tools:layout="@layout/fragment_remarks">
+            <argument
+                android:name="deviceId"
+                app:argType="string" />
+            <argument
+                android:name="deviceName"
+                app:argType="string" />
+        </fragment>
+        <activity
+            android:id="@+id/cameraActivity"
+            android:name="com.cms.cms_logbook.CameraActivity"
+            android:label="fragment_qr_scanner"
+            tools:layout="@layout/activiti_camera" />
+        <fragment
+            android:id="@+id/noteDetailsFragment"
+            android:name="com.cms.cms_logbook.NoteDetailsFragment"
+            android:label="Note Details"
+            tools:layout="@layout/fragment_note_details">
+            <argument
+                android:name="note_text"
+                app:argType="string" />
+            <argument
+                android:name="note_img"
+                app:argType="string"
+                app:nullable="true" />
+            <argument
+                android:name="note_position"
+                app:argType="integer" />
+            <argument
+                android:name="deviceId"
+                app:argType="string" />
+        </fragment>
         <action
-            android:id="@+id/action_note_to_noteDetailsFragment"
-            app:destination="@id/noteDetailsFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim"/>
-    </fragment>
-    <fragment
-        android:id="@+id/sync"
-        android:name="com.cms.cms_logbook.SyncFragment"
-        android:label="Sync"
-        tools:layout="@layout/fragment_sync" />
-    <fragment
-        android:id="@+id/noteDetailsFragment"
-        android:name="com.cms.cms_logbook.NoteDetailsFragment"
-        android:label="Note Details"
-        tools:layout="@layout/fragment_note_details" >
-        <argument
-            android:name="note_text"
-            app:argType="string" />
-        <argument
-            android:name="note_img"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="note_position"
-            app:argType="integer" />
-        <argument
-            android:name="deviceId"
-            app:argType="string" />
-    </fragment>
+            android:id="@+id/action_global_nav_settings_graph"
+            app:destination="@id/nav_settings_graph" />
+    </navigation>
+    <include app:graph="@navigation/nav_settings_graph" />
 </navigation>
