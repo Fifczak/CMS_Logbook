@@ -70,7 +70,7 @@ public class SettingsFragment extends Fragment {
 
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         mContainer = container;
-        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
         slideLeft = AnimationUtils.loadAnimation(view.getContext(), R.anim.enter_anim);
         slideRight = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_from_right);
         binding.buttonAuthentication.clearAnimation();

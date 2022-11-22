@@ -136,4 +136,14 @@ public class StartFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        TokenHandler tokenHandler = new TokenHandler();
+        File basePath = getContext().getExternalFilesDir("CMSData");
+        String activationToken = tokenHandler.readActivationTokenFromFile(basePath);
+        ContentResolver context = getContext().getContentResolver();
+        access = tokenHandler.checkActivationToken(activationToken, context);
+    }
+
 }
