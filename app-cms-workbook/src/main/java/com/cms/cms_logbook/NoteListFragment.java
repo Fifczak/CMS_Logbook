@@ -121,7 +121,7 @@ public class NoteListFragment extends Fragment {
                 ListElements.add(note);
             }
         }
-        ArrayAdapter arrayAdapter = new NotesAdapter(view.getContext(), ListElements);
+        ArrayAdapter arrayAdapter = new NotesAdapter(view.getContext(), ListElements, mdeviceId);
         listview.setAdapter(arrayAdapter);
 
         AddButton.setOnClickListener(new View.OnClickListener() {
@@ -223,8 +223,6 @@ public class NoteListFragment extends Fragment {
                     writer.close();
                 }
             }
-
-
         }
         catch(Exception e){
             System.out.println(e);

@@ -9,5 +9,30 @@
         android:id="@+id/SettingsFragment"
         android:name="com.cms.cms_logbook.SettingsFragment"
         android:label="Settings"
-        tools:layout="@layout/fragment_settings"/>
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_SettingsFragment_to_settingsAuthenticationFragment"
+            app:destination="@id/settingsAuthenticationFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim"/>
+        <action
+            android:id="@+id/action_SettingsFragment_to_settingsAuthorizationFragment"
+            app:destination="@id/settingsAuthorizationFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/settingsAuthenticationFragment"
+        android:name="com.cms.cms_logbook.SettingsAuthenticationFragment"
+        android:label="Authentication"
+        tools:layout="@layout/fragment_settings_authentication" />
+    <fragment
+        android:id="@+id/settingsAuthorizationFragment"
+        android:name="com.cms.cms_logbook.SettingsAuthorizationFragment"
+        android:label="Authorization"
+        tools:layout="@layout/fragment_settings_authorization" />
 </navigation>

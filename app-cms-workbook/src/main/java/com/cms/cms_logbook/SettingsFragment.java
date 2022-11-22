@@ -1,18 +1,28 @@
 package com.cms.cms_logbook;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.media.MediaDrm;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -22,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.cms.cms_logbook.databinding.ActivitySettingsBinding;
 import com.cms.cms_logbook.databinding.FragmentSettingsBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -39,119 +50,17 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class SettingsFragment extends Fragment {
 
     private FragmentSettingsBinding binding;
-    private Button checkTokenButton;
-    private Button getTokenButton;
-    private EditText tokenInput;
-    private Button checkAuthTokenButton;
-    private Button getAuthTokenButton;
-    private EditText authTokenInput;
+    private Animation slideRight;
+    private Animation slideLeft;
 
-    private void sendTokenRequest(EditText tokenInput,View v) {
+    public ViewGroup mContainer;
 
-//        "7B5zIqmRGXmrJTFmKa99vcit"
-        TokenHandler tokenHandler = new TokenHandler();
-        File basePath = getContext().getExternalFilesDir("CMSData");
-        String authToken = tokenHandler.readAuthTokenFromFile(basePath);
-
-        RequestQueue queue = Volley.newRequestQueue(this.getContext());
-        String url = "https://api.info-marine.com/api/access_token";
-        JSONObject jsonObject = new JSONObject();
-        String androidId = Settings.Secure.getString(getContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        try {
-            jsonObject.put("android_id", androidId);
-        } catch (JSONException e) {
-            System.out.println(e);
-
-        }
-        JsonObjectRequest putRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                (Response.Listener<JSONObject>) response -> {
-
-                    try {
-                        String tokenStr = (String) response.get("activation_token");
-
-
-                        tokenInput.setText(tokenStr);
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-
-                },
-                (Response.ErrorListener) error -> {
-                    if (error.toString().contains("AuthFailureError")){
-                        String no_access = "Authorization failed. Please check auth token.";
-                        Snackbar mySnackbar = Snackbar.make(v, no_access, Snackbar.LENGTH_LONG);
-                        mySnackbar.show();
-                    }
-                }
-        ) {
-            /**
-             * Passing some request headers
-             */
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                headers.put("apikey", authToken);
-                return headers;
-            }
-        };
-
-        queue.add(putRequest);
-    }
-
-    private void sendAuthTokenRequest(EditText authTokenInput,View v) {
-
-//        "7B5zIqmRGXmrJTFmKa99vcit"
-//        TokenHandler tokenHandler = new TokenHandler();
-//        File basePath = getContext().getExternalFilesDir("CMSData");
-//        String authToken = tokenHandler.readAuthTokenFromFile(basePath);
-
-        RequestQueue queue = Volley.newRequestQueue(this.getContext());
-        String url = "https://api.info-marine.com/req/auth";
-        JSONObject jsonObject = new JSONObject();
-        String androidId = Settings.Secure.getString(getContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        try {
-            jsonObject.put("android_id", androidId);
-        } catch (JSONException e) {
-            System.out.println(e);
-
-        }
-        JsonObjectRequest putRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                (Response.Listener<JSONObject>) response -> {
-
-                    try {
-                        String tokenStr = (String) response.get("auth_token");
-                        authTokenInput.setText(tokenStr);
-
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-
-                },
-                (Response.ErrorListener) error -> {
-                    System.out.println(error);
-                }
-        ) {
-            /**
-             * Passing some request headers
-             */
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-        };
-
-        queue.add(putRequest);
-    }
 
     @Override
     public View onCreateView(
@@ -160,94 +69,38 @@ public class SettingsFragment extends Fragment {
     ) {
 
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        mContainer = container;
+        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        slideLeft = AnimationUtils.loadAnimation(view.getContext(), R.anim.enter_anim);
+        slideRight = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_from_right);
+        binding.buttonAuthentication.clearAnimation();
+        binding.buttonAuthorization.clearAnimation();
+        binding.buttonAuthentication.startAnimation(slideRight);
+        binding.buttonAuthorization.startAnimation(slideLeft);
+
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        checkTokenButton = (Button) view.findViewById(R.id.checkTokenButton);
-        getTokenButton = (Button) view.findViewById(R.id.getTokenButton);
-        tokenInput = (EditText) view.findViewById(R.id.tokenInput);
 
-        checkAuthTokenButton = (Button) view.findViewById(R.id.checkAuthTokenButton);
-        getAuthTokenButton = (Button) view.findViewById(R.id.getAuthTokenButton);
-        authTokenInput = (EditText) view.findViewById(R.id.authTokenInput);
-
-
-        TokenHandler tokenHandler = new TokenHandler();
-        File basePath = getContext().getExternalFilesDir("CMSData");
-        String activationToken = tokenHandler.readActivationTokenFromFile(basePath);
-        String authToken = tokenHandler.readAuthTokenFromFile(basePath);
-
-
-        tokenInput.getText().insert(tokenInput.getSelectionStart(), activationToken);
-        authTokenInput.getText().insert(authTokenInput.getSelectionStart(), authToken);
-
-        checkTokenButton.setOnClickListener(new View.OnClickListener() {
+        binding.buttonAuthorization.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String tokenText = tokenInput.getText().toString();
-                TokenHandler tokenHandler = new TokenHandler();
-                String path = getContext().getExternalFilesDir("CMSData") + "/activationToken.json";
-                ContentResolver context = getContext().getContentResolver();
-                Boolean tokenValid = tokenHandler.checkActivationToken(tokenText, context);
-                if (tokenValid == Boolean.TRUE) {
-                    Snackbar mySnackbar = Snackbar.make(view,
-                            "Token active", Snackbar.LENGTH_LONG);
-                    mySnackbar.show();
-                    tokenHandler.saveActivationTokenFile(tokenText, path);
-                }else{
-                    Snackbar mySnackbar = Snackbar.make(view,
-                            "Bad token. Try again or contact: office@cm-solution.tech", Snackbar.LENGTH_LONG);
-                    mySnackbar.show();
-                }
-//                new TokenHandler().read_token(tokenText);
+            public void onClick(View view) {
+                NavHostFragment.findNavController(SettingsFragment.this)
+                        .navigate(R.id.action_SettingsFragment_to_settingsAuthorizationFragment);
 
             }
-
-
         });
 
-        checkAuthTokenButton.setOnClickListener(new View.OnClickListener() {
+        binding.buttonAuthentication.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String tokenText = authTokenInput.getText().toString();
-                TokenHandler tokenHandler = new TokenHandler();
-                String path = getContext().getExternalFilesDir("CMSData") + "/authToken.json";
-
-                Snackbar mySnackbar = Snackbar.make(view,
-                        "Token saved", Snackbar.LENGTH_LONG);
-                mySnackbar.show();
-                tokenHandler.saveAuthTokenFile(tokenText, path);
-
-//                new TokenHandler().read_token(tokenText);
-
+            public void onClick(View view) {
+                NavHostFragment.findNavController(SettingsFragment.this)
+                        .navigate(R.id.action_SettingsFragment_to_settingsAuthenticationFragment);
             }
-
-
         });
-
-
-        getTokenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                 sendTokenRequest(tokenInput, v);
-            }
-
-
-        });
-
-        getAuthTokenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendAuthTokenRequest(authTokenInput, v);
-            }
-
-
-        });
-
-
 
     }
 

@@ -37,6 +37,7 @@ public class StartFragment extends Fragment {
     public String devName;
     private Animation slideRight;
     private Animation slideLeft;
+    public Integer access = 1;
 
 
     @Override
@@ -55,13 +56,10 @@ public class StartFragment extends Fragment {
         binding.buttonSelectMachine.startAnimation(slideLeft);
         binding.buttonQrCode.startAnimation(slideRight);
 
-
-
-
-
-
         return binding.getRoot();
     }
+
+
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -70,48 +68,47 @@ public class StartFragment extends Fragment {
         File basePath = getContext().getExternalFilesDir("CMSData");
         String activationToken = tokenHandler.readActivationTokenFromFile(basePath);
 
-
-
         ContentResolver context = getContext().getContentResolver();
-        Boolean access = tokenHandler.checkActivationToken(activationToken, context);
+        access = tokenHandler.checkActivationToken(activationToken, context);
 
-        if (access == Boolean.TRUE) {
-            binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (access == 0) {
                     NavHostFragment.findNavController(StartFragment.this)
                             .navigate(R.id.action_startFragment_to_deviceListFragment);
+                } else if (access == 1) {
+                    String no_access = "No valid token. Please contact with office@cm-solution.tech";
+                    Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
+                }  else {
+                    String no_access = "The token has expired. Please contact with office@cm-solution.tech";
+                    Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
                 }
-            });
-            binding.buttonQrCode.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            }
+        });
+
+        binding.buttonQrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (access == 0) {
                     if (Objects.equals(Build.MODEL, "T21G")) {
                         startActivityForResult(new Intent(view.getContext(), CameraRWActivity.class), REQUEST_CODE);
                     } else {
                         startActivityForResult(new Intent(view.getContext(), CameraActivity.class), REQUEST_CODE);
                     }
-                }
-            });
-        }else{
-            String no_access = "No valid token. Please contact with office@cm-solution.tech";
-            binding.buttonSelectMachine.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                } else if (access == 1) {
+                    String no_access = "No valid token. Please contact with office@cm-solution.tech";
+                    Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    mySnackbar.show();
+                } else {
+                    String no_access = "The token has expired. Please contact with office@cm-solution.tech";
                     Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
                     mySnackbar.show();
                 }
-            });
-            binding.buttonQrCode.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
-                    mySnackbar.show();
-                }
-            });
-        }
-
-
+            }
+        });
     }
 
     @SuppressLint("ResourceAsColor")
@@ -128,13 +125,10 @@ public class StartFragment extends Fragment {
                     devName = "Trzeba zrobić z jsona"; // data.getStringExtra(CameraActivity.QR_SCAN_RESULT);
                 }
 
-
                 Navigation.findNavController(binding.getRoot()).navigate(StartFragmentDirections.actionStartFragmentToDeviceMenuFragment(devId, devName));
             }
         }
     }
-
-
 
     @Override
     public void onDestroyView() {

@@ -77,6 +77,10 @@ public class DeviceModel {
         this.notes.add(note);
     }
 
+    public void deleteNote(int position){
+        this.notes.remove(position);
+    }
+
     public void addMeasurement(String tempmeas) {
         this.measurements.add(tempmeas);
     }

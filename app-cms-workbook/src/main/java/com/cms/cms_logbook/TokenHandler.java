@@ -46,7 +46,7 @@ public class TokenHandler {
 
 
 
-    public Boolean checkActivationToken(String tokenText, ContentResolver context) {
+    public int checkActivationToken(String tokenText, ContentResolver context) {
         String key = "2ColzZecaMIPVjeq";
         try {
 
@@ -73,18 +73,20 @@ public class TokenHandler {
             }
             if (todayDate.compareTo(tokenDate) == -1){
                 dueOk = true;
+            } else {
+                return 2;
             }
             if (snOk == true && dueOk == true){
-                return Boolean.TRUE;
+                return 0;
             };
 
-            return Boolean.FALSE;
+            return 1;
 
 
         }catch(Exception e){
             System.out.println(e);
         }
-        return Boolean.FALSE;
+        return 1;
 
     }
 

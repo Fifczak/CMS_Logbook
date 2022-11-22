@@ -7,107 +7,41 @@
     tools:context=".SettingsFragment">
 
     <Button
-        android:id="@+id/checkTokenButton"
+        android:id="@+id/button_authentication"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/gradient_background"
-        android:text="@string/check_token"
+        android:background="@drawable/gradient_background_buttons_left"
         android:textColor="@color/white"
+        android:text="@string/authentication"
+        android:textSize="36sp"
+        android:layout_marginRight="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tokenInput" />
-
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/token_to_activate"
-        android:textSize="35dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/tokenInput"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Enter token"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_first" />
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:text="@string/token_to_auth"
-        android:textSize="35dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getTokenButton" />
-
-
-    <EditText
-        android:id="@+id/authTokenInput"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Enter token"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_second" />
+        app:layout_constraintTop_toBottomOf="@id/button_authorization"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_weight="1" />
 
     <Button
-        android:id="@+id/getTokenButton"
+        android:id="@+id/button_authorization"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/gradient_background"
-        android:text="@string/get_token"
+        android:layout_height="0dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/gradient_background_buttons_right"
+        android:text="@string/authorization"
         android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_authentication"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkTokenButton" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_weight="1" />
 
-    <Button
-        android:id="@+id/getAuthTokenButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/gradient_background"
-        android:text="@string/get_auth_token"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkAuthTokenButton" />
-
-    <Button
-        android:id="@+id/checkAuthTokenButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/gradient_background"
-        android:text="@string/check_auth_token"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/authTokenInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

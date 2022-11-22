@@ -22,9 +22,11 @@ public class NotesAdapter extends ArrayAdapter<NoteModel> {
 
     public String note_text;
     public String note_img;
+    public String device_id;
 
-    public NotesAdapter(Context context, ArrayList<NoteModel> users) {
+    public NotesAdapter(Context context, ArrayList<NoteModel> users, String deviceId) {
         super(context, 0, users);
+        device_id = deviceId;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -51,7 +53,7 @@ public class NotesAdapter extends ArrayAdapter<NoteModel> {
                 NoteModel note = getItem(position);
                 note_text = note.note_text;
                 note_img = note.note_img;
-                Navigation.findNavController(view).navigate(NoteListFragmentDirections.actionNoteToNoteDetailsFragment(note_text, note_img, position));
+                Navigation.findNavController(view).navigate(NoteListFragmentDirections.actionNoteToNoteDetailsFragment(note_text, note_img, position, device_id));
             }
         });
 
