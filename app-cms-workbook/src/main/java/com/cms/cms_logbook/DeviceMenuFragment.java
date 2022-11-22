@@ -112,7 +112,7 @@ public class DeviceMenuFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("deviceId", mdeviceId);
                 NavHostFragment.findNavController(DeviceMenuFragment.this)
-                        .navigate(R.id.action_deviceMenuFragment_to_remarksFragment, bundle);
+                        .navigate(R.id.action_deviceMenuFragment_to_remarksListFragment, bundle);
 
             }
         });
@@ -181,7 +181,7 @@ public class DeviceMenuFragment extends Fragment {
     private DeviceModel getDeviceFromQR(String qrId, DeviceMenuFragment context) {
 
         DeviceModel deviceScanned;
-        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null);
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
 
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";

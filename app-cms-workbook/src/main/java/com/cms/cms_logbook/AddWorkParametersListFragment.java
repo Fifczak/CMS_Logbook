@@ -153,7 +153,8 @@ public class AddWorkParametersListFragment extends Fragment {
     }
     private DeviceModel getDeviceFromQR(String qrId) {
         DeviceModel deviceScanned;
-        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null);
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
+
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
@@ -176,8 +177,8 @@ public class AddWorkParametersListFragment extends Fragment {
     private DeviceModel putMeasurementToDeviceFromQR(String qrId, String deviceMeasurement) {
         DeviceModel deviceScanned;
         DeviceModel deviceScanned2;
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
 
-        deviceScanned = new DeviceModel(null,null, null, null, null, null,null, null, null, null);
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));

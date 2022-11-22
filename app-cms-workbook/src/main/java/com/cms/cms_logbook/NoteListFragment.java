@@ -161,7 +161,8 @@ public class NoteListFragment extends Fragment {
 
     private DeviceModel getDeviceFromQR(String qrId, NoteListFragment context) {
         DeviceModel deviceScanned;
-        deviceScanned = new DeviceModel(null,null,null, null, null, null, null, null, null, null);
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
+
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
@@ -204,8 +205,8 @@ public class NoteListFragment extends Fragment {
     private DeviceModel putNoteToDeviceFromQR(String qrId, String deviceNote) {
         DeviceModel deviceScanned;
         DeviceModel deviceScanned2;
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
 
-        deviceScanned = new DeviceModel(null,null,null, null, null, null, null, null, null, null);
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));

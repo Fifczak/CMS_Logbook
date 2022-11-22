@@ -158,7 +158,8 @@ public class RepairHistoryListFragment extends Fragment {
     }
     private DeviceModel getDeviceFromQR(String qrId) {
         DeviceModel deviceScanned;
-        deviceScanned = new DeviceModel(null,null,null, null, null, null, null, null, null, null);
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
+
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
@@ -180,8 +181,8 @@ public class RepairHistoryListFragment extends Fragment {
 
     private DeviceModel putOvhToDeviceFromQR(String qrId, DeviceOverhaulModel ovhModel) {
         DeviceModel deviceScanned;
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
 
-        deviceScanned = new DeviceModel(null,null,null, null, null, null, null, null, null, null);
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));

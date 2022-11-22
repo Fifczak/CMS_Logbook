@@ -18,6 +18,7 @@ public class DeviceModel {
     private ArrayList<NoteModel> notes;
     private ArrayList<String> measurements;
     private ArrayList<DeviceOverhaulModel> overhauls;
+    private ArrayList<RemarkModel> remarks;
     private int id;
 
     // creating getter and setter methods
@@ -66,6 +67,11 @@ public class DeviceModel {
     public ArrayList<NoteModel> getNotes() {
         return notes;
     }
+
+    public ArrayList<RemarkModel> getRemarks() {
+        return remarks;
+    }
+
     public ArrayList<String> getMeasurements() {
         return measurements;
     }
@@ -100,7 +106,7 @@ public class DeviceModel {
     }
 
     // constructor
-    public DeviceModel(Integer imId, String deviceName, String isoClass, String lastDate, String nextDate, String remark, String warningClass, ArrayList<NoteModel> notes, ArrayList<String> measurements, ArrayList<DeviceOverhaulModel> overhauls) {
+    public DeviceModel(Integer imId, String deviceName, String isoClass, String lastDate, String nextDate, String remark, String warningClass, ArrayList<NoteModel> notes, ArrayList<String> measurements, ArrayList<DeviceOverhaulModel> overhauls, ArrayList<RemarkModel> remarks) {
         this.imId = imId;
         this.deviceName = deviceName;
         this.isoClass = isoClass;
@@ -111,6 +117,7 @@ public class DeviceModel {
         this.notes = notes;
         this.measurements = measurements;
         this.overhauls = overhauls;
+        this.remarks = remarks;
 
     }
 }

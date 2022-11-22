@@ -25,12 +25,9 @@ import db.DeviceModel;
  */
 public class RemarksFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String deviceId = "deviceId";
     private static final String deviceName = "deviceName";
 
-    // TODO: Rename and change types of parameters
     private String mdeviceId;
 
     private TextView nameTextView;
@@ -42,18 +39,12 @@ public class RemarksFragment extends Fragment {
     public RemarksFragment() {
         // Required empty public constructor
     }
+
     public LayoutInflater public_inflater;
     public ViewGroup public_container;
     private FragmentRemarksBinding binding;
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RemarksFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
+
     public static RemarksFragment newInstance(String param1, String param2) {
         RemarksFragment fragment = new RemarksFragment();
         Bundle args = new Bundle();
@@ -94,7 +85,6 @@ public class RemarksFragment extends Fragment {
             String mdeviceRemark = deviceScanned.getRemark();
             String mdeviceDate = deviceScanned.getLastDate();
 
-
             nameTextView.setText(mdeviceName);
             classTextView.setText(mdeviceClass);
             remarkTextView.setText(mdeviceRemark);
@@ -103,12 +93,11 @@ public class RemarksFragment extends Fragment {
         }
 
 
-
     }
     private DeviceModel getDeviceFromQR(String qrId, RemarksFragment context) {
 
         DeviceModel deviceScanned;
-        deviceScanned = new DeviceModel(null,null, null, null, null, null,null, null, null, null);
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
 
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
