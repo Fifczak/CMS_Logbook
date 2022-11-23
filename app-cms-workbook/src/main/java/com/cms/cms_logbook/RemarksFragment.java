@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 import db.DeviceModel;
-import db.RemarkModel;
 
 
 public class RemarksFragment extends Fragment {

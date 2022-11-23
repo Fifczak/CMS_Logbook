@@ -1,14 +1,10 @@
 package com.cms.cms_logbook;
 
-import android.content.ContentResolver;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;

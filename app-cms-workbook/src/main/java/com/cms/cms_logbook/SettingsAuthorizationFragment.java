@@ -1,7 +1,6 @@
 package com.cms.cms_logbook;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
