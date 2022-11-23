@@ -67,8 +67,6 @@ public class RepairHistoryDetailsFragment extends Fragment {
             mdeviceMaintananceRhs = getArguments().getInt(deviceMaintananceRhs);
             mdeviceMaintananceComment = getArguments().getString(deviceMaintananceComment);
             mifOverhaul = getArguments().getBoolean(ifOverhaul);
-
-            System.out.println(mposition);
         }
     }
 

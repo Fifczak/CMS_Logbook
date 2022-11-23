@@ -42,7 +42,6 @@ public class DeviceListFragment extends Fragment {
 
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
-            System.out.println(path);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             Gson g = new Gson();
             DeviceModel[] deviceArray = g.fromJson(bufferedReader, DeviceModel[].class);

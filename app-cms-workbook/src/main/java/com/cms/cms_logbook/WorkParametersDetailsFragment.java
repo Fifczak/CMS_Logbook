@@ -89,7 +89,6 @@ public class WorkParametersDetailsFragment extends Fragment {
         String value = mParameter.substring(mParameter.indexOf(']')+1, mParameter.length());
         String task = mParameter.substring(1, mParameter.indexOf(']'));
         GetValue.setText(value);
-        System.out.println(task);
         spinner.setSelection(WorkParametersAdapter.getPosition(task));
 
         updateButton.setOnClickListener(new View.OnClickListener() {
