@@ -32,17 +32,12 @@ public class DeviceModel {
     }
 
     public String getLastDate() {
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-//        String strDate = dateFormat.format(lastDate);
-
         return lastDate;
     }
-
 
     public String getNextDate() {
         return nextDate;
     }
-
 
     public String getRemark() {
         return remark;
@@ -85,6 +80,10 @@ public class DeviceModel {
 
     public void deleteNote(int position){
         this.notes.remove(position);
+    }
+
+    public void deleteWorkParameters(int position){
+        this.measurements.remove(position);
     }
 
     public void addMeasurement(String tempmeas) {

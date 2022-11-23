@@ -59,9 +59,13 @@
         </fragment>
         <fragment
             android:id="@+id/addWorkParametersFragment"
-            android:name="com.cms.cms_logbook.AddWorkParametersListFragment"
+            android:name="com.cms.cms_logbook.WorkParametersListFragment"
             android:label="Add parameter value"
-            tools:layout="@layout/fragment_add_work_parameters_list" />
+            tools:layout="@layout/fragment_work_parameters_list" >
+            <action
+                android:id="@+id/action_addWorkParametersFragment_to_workParametersDetailsFragment"
+                app:destination="@id/workParametersDetailsFragment" />
+        </fragment>
         <fragment
             android:id="@+id/deviceManualFragment"
             android:name="com.cms.cms_logbook.DeviceManualFragment"
@@ -175,6 +179,20 @@
             <argument
                 android:name="remarkDate"
                 app:argType="string" />
+            <argument
+                android:name="deviceId"
+                app:argType="string" />
+        </fragment>
+        <fragment
+            android:id="@+id/workParametersDetailsFragment"
+            android:name="com.cms.cms_logbook.WorkParametersDetailsFragment"
+            android:label="fragment_work_parameters_details"
+            tools:layout="@layout/fragment_work_parameters_details" >
+            <argument
+                android:name="parameter"
+                app:argType="string" />
+            <argument android:name="position"
+                app:argType="integer" />
             <argument
                 android:name="deviceId"
                 app:argType="string" />

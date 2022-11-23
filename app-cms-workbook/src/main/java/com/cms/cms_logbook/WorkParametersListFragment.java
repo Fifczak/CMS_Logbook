@@ -30,20 +30,18 @@ import db.DeviceModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddWorkParametersListFragment#newInstance} factory method to
+ * Use the {@link WorkParametersListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddWorkParametersListFragment extends Fragment {
+public class WorkParametersListFragment extends Fragment {
     ListView listview;
     Button Addbutton;
     EditText GetValue;
     Spinner GetTask;
 
-    ArrayList<String> ListElements = new ArrayList<String>();
-
+    public ArrayList<String> ListElements;
 
     private static final String deviceId = "deviceId";
-
 
     private Spinner spinner;
     private static final String[] paths = {"RHs", "RPM", "PRESSURE", "TEMP"};
@@ -51,21 +49,12 @@ public class AddWorkParametersListFragment extends Fragment {
     private String mdeviceId;
 
 
-    public AddWorkParametersListFragment() {
+    public WorkParametersListFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddWorkParametersFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddWorkParametersListFragment newInstance(String param1, String param2) {
-        AddWorkParametersListFragment fragment = new AddWorkParametersListFragment();
+    public static WorkParametersListFragment newInstance(String param1, String param2) {
+        WorkParametersListFragment fragment = new WorkParametersListFragment();
         Bundle args = new Bundle();
         args.putString(deviceId, param1);
         fragment.setArguments(args);
@@ -84,13 +73,13 @@ public class AddWorkParametersListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_work_parameters_list, container, false);
+        return inflater.inflate(R.layout.fragment_work_parameters_list, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        ListElements = new ArrayList<String>();
         spinner = (Spinner)view.findViewById(R.id.spinner2);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_spinner_item,paths);
@@ -120,11 +109,8 @@ public class AddWorkParametersListFragment extends Fragment {
                 (ListElements);
 
 
-        final ArrayAdapter< String > adapter2 = new ArrayAdapter < String >
-                (this.getContext(), android.R.layout.simple_list_item_1,
-                        ListElementsArrayList);
-
-        listview.setAdapter(adapter2);
+        ArrayAdapter arrayAdapter = new WorkParametersAdapter(view.getContext(), ListElements, mdeviceId);
+        listview.setAdapter(arrayAdapter);
 
         Addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,8 +129,8 @@ public class AddWorkParametersListFragment extends Fragment {
                     String fTxt = "[" + formatter.format(date)  + "]" + "[" + tmpTxt2 + "]" + tmpTxt;
 
                     DeviceModel deviceScanned = putMeasurementToDeviceFromQR(mdeviceId, fTxt);
-                    ListElementsArrayList.add(fTxt);
-                    adapter2.notifyDataSetChanged();
+                    ListElements.add(fTxt);
+                    arrayAdapter.notifyDataSetChanged();
                 }
 
             }
