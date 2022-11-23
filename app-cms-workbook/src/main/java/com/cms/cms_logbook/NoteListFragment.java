@@ -60,32 +60,13 @@ public class NoteListFragment extends Fragment {
 
     private static final int REQUEST_CODE = 105;
     private static final String deviceId = "deviceId";
-    private static final String ARG_PARAM2 = "param2";
-
 
     private String mdeviceId;
 
     public NoteListFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Note.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static NoteListFragment newInstance(String param1, String param2) {
-        NoteListFragment fragment = new NoteListFragment();
-        Bundle args = new Bundle();
-        args.putString(deviceId, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

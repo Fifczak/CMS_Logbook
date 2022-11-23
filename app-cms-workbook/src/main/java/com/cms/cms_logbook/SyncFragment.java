@@ -44,24 +44,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SyncFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class SyncFragment extends Fragment {
-    ListView listview;
-    Button Addbutton;
-    EditText GetValue;
-    ArrayList<String> ListElements = new ArrayList<String>();
 
     private Animation slideRight;
     private Animation slideLeft;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String deviceId = "deviceId";
-    private static final String ARG_PARAM2 = "param2";
 
     private String mdeviceId;
 
@@ -73,23 +62,6 @@ public class SyncFragment extends Fragment {
     public ViewGroup public_container;
     private FragmentSyncBinding binding;
 
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Note.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SyncFragment newInstance(String param1, String param2) {
-        SyncFragment fragment = new SyncFragment();
-        Bundle args = new Bundle();
-        args.putString(deviceId, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -180,9 +152,7 @@ public class SyncFragment extends Fragment {
                     mySnackbar.show();
                 }
         ){
-            /**
-             * Passing some request headers
-             */
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -235,9 +205,6 @@ public class SyncFragment extends Fragment {
                     }
                 }
         ) {
-            /**
-             * Passing some request headers
-             */
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();

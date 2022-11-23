@@ -25,20 +25,12 @@ import com.google.gson.Gson;
 
 import db.DeviceModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DeviceMenuFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DeviceMenuFragment extends Fragment {
 
     private static final int REQUEST_CODE = 105;
 
-    // TODO: Rename parameter arguments, choose names that match
     private static final String deviceId = "deviceId";
-    private static final String deviceName = "deviceName";
 
-    // TODO: Rename and change types of parameters
     private String mdeviceId;
     private String mdeviceName;
     private TextView textView;
@@ -55,22 +47,8 @@ public class DeviceMenuFragment extends Fragment {
     public ViewGroup public_container;
     private FragmentDeviceMenuBinding binding;
 
-    public static DeviceMenuFragment newInstance(String param1, String param2) {
-        DeviceMenuFragment fragment = new DeviceMenuFragment();
-        Bundle args = new Bundle();
-//        args.putString(deviceId, param1);
-//        args.putString(deviceName, param2);
-        args.putInt("deviceId", 5);
-        fragment.setArguments(args);
 
-        return fragment;
-    }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.fragment_device_menu, container, false);
-//    }
-@Override
+    @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
@@ -95,6 +73,7 @@ public class DeviceMenuFragment extends Fragment {
         binding.syncButton.startAnimation(slideLeft);
         return binding.getRoot();
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -153,7 +132,7 @@ public class DeviceMenuFragment extends Fragment {
         binding.DeviceManualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Objects.equals(Build.MODEL, "T21G")){
+                if (Objects.equals(Build.MODEL, "T21G")) {
                     Intent documentIntent = new Intent(view.getContext(), DocumentActivity.class);
                     documentIntent.putExtra("device_id", mdeviceId);
                     startActivityForResult(documentIntent, REQUEST_CODE);
@@ -177,11 +156,10 @@ public class DeviceMenuFragment extends Fragment {
         });
     }
 
-
     private DeviceModel getDeviceFromQR(String qrId, DeviceMenuFragment context) {
 
         DeviceModel deviceScanned;
-        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
+        deviceScanned = new DeviceModel(null, null, null, null, null, null, null, null, null, null, null);
 
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
@@ -195,15 +173,9 @@ public class DeviceMenuFragment extends Fragment {
                     deviceScanned = device;
                 }
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return deviceScanned;
     }
-
-
-
-
-
 }
