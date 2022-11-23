@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RepairHistoryListFragment">
+    tools:context=".RepairHistoryDetailsFragment">
 
 
     <EditText
@@ -36,18 +36,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/updateButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rhsInput"
         android:layout_marginTop="10dp"
         android:background="@drawable/gradient_background"
-        android:text="@string/add_value"
+        android:text="@string/update"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/simpleSwitch" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rhsInput"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/gradient_background"
+        android:text="@string/delete"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateButton" />
 
     <Switch
         android:id="@+id/simpleSwitch"
@@ -59,17 +74,6 @@
         app:layout_constraintStart_toStartOf="@+id/commentInput"
         app:layout_constraintTop_toBottomOf="@+id/commentInput" />
 
-    <ListView
-        android:id="@+id/repairHistoryList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/addButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addButton"></ListView>
 
     <TextView
         android:id="@+id/rhsLabel"

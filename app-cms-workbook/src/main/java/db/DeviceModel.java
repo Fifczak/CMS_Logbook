@@ -86,6 +86,10 @@ public class DeviceModel {
         this.measurements.remove(position);
     }
 
+    public void deleteOverhauls(int position){
+        this.overhauls.remove(position);
+    }
+
     public void addMeasurement(String tempmeas) {
         this.measurements.add(tempmeas);
     }

@@ -105,10 +105,6 @@ public class WorkParametersListFragment extends Fragment {
             }
         }
 
-        final List< String > ListElementsArrayList = new ArrayList< String >
-                (ListElements);
-
-
         ArrayAdapter arrayAdapter = new WorkParametersAdapter(view.getContext(), ListElements, mdeviceId);
         listview.setAdapter(arrayAdapter);
 

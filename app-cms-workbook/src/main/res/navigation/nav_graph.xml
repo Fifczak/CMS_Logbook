@@ -3,10 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation">
+    app:startDestination="@id/startFragment">
 
-    <navigation android:id="@+id/navigation"
-        app:startDestination="@id/startFragment">
         <fragment
             android:id="@+id/deviceMenuFragment"
             android:name="com.cms.cms_logbook.DeviceMenuFragment"
@@ -106,7 +104,11 @@
             android:id="@+id/repairHistoryFragment"
             android:name="com.cms.cms_logbook.RepairHistoryListFragment"
             android:label="Repair history"
-            tools:layout="@layout/fragment_repair_history_list" />
+            tools:layout="@layout/fragment_repair_history_list" >
+            <action
+                android:id="@+id/action_repairHistoryFragment_to_repairHistoryDetailsFragment"
+                app:destination="@id/repairHistoryDetailsFragment" />
+        </fragment>
         <fragment
             android:id="@+id/startFragment"
             android:name="com.cms.cms_logbook.StartFragment"
@@ -197,5 +199,25 @@
                 android:name="deviceId"
                 app:argType="string" />
         </fragment>
-    </navigation>
+    <fragment
+        android:id="@+id/repairHistoryDetailsFragment"
+        android:name="com.cms.cms_logbook.RepairHistoryDetailsFragment"
+        android:label="fragment_repair_history_details"
+        tools:layout="@layout/fragment_repair_history_details" >
+        <argument
+            android:name="deviceMaintananceRhs"
+            app:argType="integer" />
+        <argument
+            android:name="deviceMaintananceComment"
+            app:argType="string" />
+        <argument
+            android:name="ifOverhaul"
+            app:argType="boolean" />
+        <argument
+            android:name="deviceId"
+            app:argType="string" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
 </navigation>
