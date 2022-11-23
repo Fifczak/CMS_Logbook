@@ -42,11 +42,6 @@ import com.cms.cms_logbook.AddPhotoActivity;
 import com.cms.cms_logbook.AddPhotoRWActivity;
 import com.cms.cms_logbook.NotesAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NoteListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NoteListFragment extends Fragment {
 
     ListView listview;
@@ -66,7 +61,7 @@ public class NoteListFragment extends Fragment {
     public NoteListFragment() {
         // Required empty public constructor
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
