@@ -155,14 +155,29 @@
                 android:name="deviceId"
                 app:argType="string" />
         </fragment>
-        <action
-            android:id="@+id/action_global_nav_settings_graph"
-            app:destination="@id/nav_settings_graph" />
         <fragment
             android:id="@+id/remarksListFragment"
             android:name="com.cms.cms_logbook.RemarksListFragment"
-            android:label="fragment_remarks_list"
-            tools:layout="@layout/fragment_remarks_list" />
+            android:label="Remarks list"
+            tools:layout="@layout/fragment_remarks_list" >
+            <action
+                android:id="@+id/action_remarksListFragment_to_remarksFragment"
+                app:destination="@id/remarksFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/remarksFragment"
+            android:name="com.cms.cms_logbook.RemarksFragment"
+            android:label="Remark"
+            tools:layout="@layout/fragment_remarks" >
+            <argument
+                android:name="remarkText"
+                app:argType="string" />
+            <argument
+                android:name="remarkDate"
+                app:argType="string" />
+            <argument
+                android:name="deviceId"
+                app:argType="string" />
+        </fragment>
     </navigation>
-    <include app:graph="@navigation/nav_settings_graph" />
 </navigation>

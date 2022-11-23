@@ -19,10 +19,22 @@
         android:text="TextView"
         android:textSize="32sp" />
 
+    <View
+        android:id="@+id/hr"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#c0c0c0"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_below="@+id/deviceName"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/deviceName"
-        android:layout_marginTop="10dp"></ListView>
+        android:layout_below="@+id/hr"
+        android:layout_marginTop="10dp">
+
+    </ListView>
 </RelativeLayout>

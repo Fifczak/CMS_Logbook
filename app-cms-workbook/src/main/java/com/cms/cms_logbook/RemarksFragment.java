@@ -17,18 +17,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 import db.DeviceModel;
+import db.RemarkModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RemarksFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class RemarksFragment extends Fragment {
 
     private static final String deviceId = "deviceId";
-    private static final String deviceName = "deviceName";
+    private static final String remarkText = "remarkText";
+    private static final String remarkDate = "remarkDate";
 
     private String mdeviceId;
+    private String mremarkText;
+    private String mremarkDate;
 
     private TextView nameTextView;
     private TextView classTextView;
@@ -45,20 +45,14 @@ public class RemarksFragment extends Fragment {
     private FragmentRemarksBinding binding;
 
 
-    public static RemarksFragment newInstance(String param1, String param2) {
-        RemarksFragment fragment = new RemarksFragment();
-        Bundle args = new Bundle();
-        args.putString(deviceId, param1);
-        args.putString(deviceName, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
+            mremarkText = getArguments().getString(remarkText);
+            mremarkDate = getArguments().getString(remarkDate);
         }
     }
 
@@ -82,8 +76,8 @@ public class RemarksFragment extends Fragment {
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId, this);
             String mdeviceName = deviceScanned.getDeviceName();
             String mdeviceClass = deviceScanned.getIsoClass();
-            String mdeviceRemark = deviceScanned.getRemark();
-            String mdeviceDate = deviceScanned.getLastDate();
+            String mdeviceRemark = mremarkText;
+            String mdeviceDate = mremarkDate;
 
             nameTextView.setText(mdeviceName);
             classTextView.setText(mdeviceClass);

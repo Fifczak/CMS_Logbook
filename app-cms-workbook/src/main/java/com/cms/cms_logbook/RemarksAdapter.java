@@ -20,7 +20,9 @@ import db.RemarkModel;
 public class RemarksAdapter extends ArrayAdapter<RemarkModel> {
 
     private TextView remarkTextView;
-    private TextView dateView;
+
+    public String remark_text;
+    public String remark_date;
     public String device_id;
 
     public RemarksAdapter(Context context, ArrayList<RemarkModel> users, String deviceId) {
@@ -34,11 +36,9 @@ public class RemarksAdapter extends ArrayAdapter<RemarkModel> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_remark, parent, false);
         }
         remarkTextView = (TextView) convertView.findViewById(R.id.remarkText);
-        dateView = (TextView) convertView.findViewById(R.id.dateRemark);
         LinearLayout linearRemark = (LinearLayout) convertView.findViewById(R.id.linearRemark);
 
-        remarkTextView.setText(remark.remark_text);
-        dateView.setText(remark.remark_date);
+        remarkTextView.setText("[" + remark.remark_date  + "] " + remark.remark_text);
 
         linearRemark.setTag(position);
         linearRemark.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +46,9 @@ public class RemarksAdapter extends ArrayAdapter<RemarkModel> {
             public void onClick(View view) {
                 int position = (Integer) view.getTag();
                 RemarkModel remark  = getItem(position);
+                remark_text = remark.remark_text;
+                remark_date = remark.remark_date;
+                Navigation.findNavController(view).navigate(RemarksListFragmentDirections.actionRemarksListFragmentToRemarksFragment(remark_text, remark_date, device_id));
             }
         });
 
