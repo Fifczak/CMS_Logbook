@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +17,16 @@ import java.io.FileReader;
 
 import db.DeviceModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RemarksFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class RemarksFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String deviceId = "deviceId";
-    private static final String deviceName = "deviceName";
+    private static final String remarkText = "remarkText";
+    private static final String remarkDate = "remarkDate";
 
-    // TODO: Rename and change types of parameters
     private String mdeviceId;
+    private String mremarkText;
+    private String mremarkDate;
 
     private TextView nameTextView;
     private TextView classTextView;
@@ -42,32 +37,20 @@ public class RemarksFragment extends Fragment {
     public RemarksFragment() {
         // Required empty public constructor
     }
+
     public LayoutInflater public_inflater;
     public ViewGroup public_container;
     private FragmentRemarksBinding binding;
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RemarksFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RemarksFragment newInstance(String param1, String param2) {
-        RemarksFragment fragment = new RemarksFragment();
-        Bundle args = new Bundle();
-        args.putString(deviceId, param1);
-        args.putString(deviceName, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
+            mremarkText = getArguments().getString(remarkText);
+            mremarkDate = getArguments().getString(remarkDate);
         }
     }
 
@@ -91,9 +74,8 @@ public class RemarksFragment extends Fragment {
             DeviceModel deviceScanned = getDeviceFromQR(mdeviceId, this);
             String mdeviceName = deviceScanned.getDeviceName();
             String mdeviceClass = deviceScanned.getIsoClass();
-            String mdeviceRemark = deviceScanned.getRemark();
-            String mdeviceDate = deviceScanned.getLastDate();
-
+            String mdeviceRemark = mremarkText;
+            String mdeviceDate = mremarkDate;
 
             nameTextView.setText(mdeviceName);
             classTextView.setText(mdeviceClass);
@@ -103,12 +85,11 @@ public class RemarksFragment extends Fragment {
         }
 
 
-
     }
     private DeviceModel getDeviceFromQR(String qrId, RemarksFragment context) {
 
         DeviceModel deviceScanned;
-        deviceScanned = new DeviceModel(null,null, null, null, null, null,null, null, null, null);
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
 
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";

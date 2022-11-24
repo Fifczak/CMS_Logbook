@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -133,8 +132,8 @@ public class NoteDetailsFragment extends Fragment {
 
     private DeviceModel deleteNoteToDeviceFromQR(String qrId, int note_position) {
         DeviceModel deviceScanned;
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
 
-        deviceScanned = new DeviceModel(null,null,null, null, null, null, null, null, null, null);
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
@@ -162,8 +161,8 @@ public class NoteDetailsFragment extends Fragment {
     private DeviceModel putNoteToDeviceFromQR(String qrId, String deviceNote) {
         DeviceModel deviceScanned;
         DeviceModel deviceScanned2;
+        deviceScanned = new DeviceModel(null,null, null, null, null, null, null, null, null, null, null);
 
-        deviceScanned = new DeviceModel(null,null,null, null, null, null, null, null, null, null);
         try {
             String path = getContext().getExternalFilesDir("CMSData") + "/qrdata.json";
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));

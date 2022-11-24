@@ -34,15 +34,22 @@
         <entry key="app-cms-workbook/src/main/res/layout/fragment_note_details.xml" value="0.3671875" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_note_list.xml" value="0.21640625" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_remarks.xml" value="0.33" />
+        <entry key="app-cms-workbook/src/main/res/layout/fragment_remarks_list.xml" value="0.4387135922330097" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_repair_history.xml" value="0.3775" />
+        <entry key="app-cms-workbook/src/main/res/layout/fragment_repair_history_details.xml" value="0.4550970873786408" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_repair_history_list.xml" value="0.36875" />
-        <entry key="app-cms-workbook/src/main/res/layout/fragment_settings.xml" value="0.1" />
+        <entry key="app-cms-workbook/src/main/res/layout/fragment_settings.xml" value="0.22" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_settings_authentication.xml" value="0.36875" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_settings_authorization.xml" value="0.36875" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_start.xml" value="0.22" />
         <entry key="app-cms-workbook/src/main/res/layout/fragment_sync.xml" value="0.67" />
+        <entry key="app-cms-workbook/src/main/res/layout/fragment_work_parameters_details.xml" value="0.4550970873786408" />
+        <entry key="app-cms-workbook/src/main/res/layout/fragment_work_parameters_list.xml" value="0.4550970873786408" />
         <entry key="app-cms-workbook/src/main/res/layout/item_device.xml" value="0.33" />
         <entry key="app-cms-workbook/src/main/res/layout/item_note.xml" value="0.5109223300970874" />
+        <entry key="app-cms-workbook/src/main/res/layout/item_remark.xml" value="0.4387135922330097" />
+        <entry key="app-cms-workbook/src/main/res/layout/item_repair_history.xml" value="0.4550970873786408" />
+        <entry key="app-cms-workbook/src/main/res/layout/item_work_parameter.xml" value="0.4550970873786408" />
         <entry key="app-cms-workbook/src/main/res/menu/menu_main.xml" value="0.33" />
         <entry key="app-cms-workbook/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.199" />
         <entry key="app-cms-workbook/src/main/res/xml/file_paths.xml" value="0.31953125" />

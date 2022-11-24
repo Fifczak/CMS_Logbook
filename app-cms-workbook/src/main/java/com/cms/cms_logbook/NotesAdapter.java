@@ -15,7 +15,6 @@ import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 
-import db.DeviceListModel;
 import db.NoteModel;
 
 public class NotesAdapter extends ArrayAdapter<NoteModel> {

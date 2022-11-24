@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation">
+    app:startDestination="@id/startFragment">
 
-    <navigation android:id="@+id/navigation"
-        app:startDestination="@id/startFragment">
         <fragment
             android:id="@+id/deviceMenuFragment"
             android:name="com.cms.cms_logbook.DeviceMenuFragment"
-            android:label="Device menu"
+            android:label="Machine menu"
             tools:layout="@layout/fragment_device_menu">
             <argument
                 android:name="deviceId"
@@ -18,13 +16,6 @@
             <argument
                 android:name="deviceName"
                 app:argType="string" />
-            <action
-                android:id="@+id/action_deviceMenuFragment_to_remarksFragment"
-                app:destination="@id/remarksFragment"
-                app:enterAnim="@anim/enter_anim"
-                app:exitAnim="@anim/exit_anim"
-                app:popEnterAnim="@anim/pop_enter_anim"
-                app:popExitAnim="@anim/pop_exit_anim" />
             <action
                 android:id="@+id/action_deviceMenuFragment_to_repairHistoryFragment"
                 app:destination="@id/repairHistoryFragment"
@@ -60,16 +51,23 @@
                 app:exitAnim="@anim/exit_anim"
                 app:popEnterAnim="@anim/pop_enter_anim"
                 app:popExitAnim="@anim/pop_exit_anim" />
+            <action
+                android:id="@+id/action_deviceMenuFragment_to_remarksListFragment"
+                app:destination="@id/remarksListFragment" />
         </fragment>
         <fragment
             android:id="@+id/addWorkParametersFragment"
-            android:name="com.cms.cms_logbook.AddWorkParametersListFragment"
+            android:name="com.cms.cms_logbook.WorkParametersListFragment"
             android:label="Add parameter value"
-            tools:layout="@layout/fragment_add_work_parameters_list" />
+            tools:layout="@layout/fragment_work_parameters_list" >
+            <action
+                android:id="@+id/action_addWorkParametersFragment_to_workParametersDetailsFragment"
+                app:destination="@id/workParametersDetailsFragment" />
+        </fragment>
         <fragment
             android:id="@+id/deviceManualFragment"
             android:name="com.cms.cms_logbook.DeviceManualFragment"
-            android:label="Device manual"
+            android:label="Machine manual"
             tools:layout="@layout/fragment_device_manual" />
         <fragment
             android:id="@+id/note"
@@ -92,7 +90,7 @@
         <fragment
             android:id="@+id/deviceListFragment"
             android:name="com.cms.cms_logbook.DeviceListFragment"
-            android:label="Devices list"
+            android:label="Machine list"
             tools:layout="@layout/fragment_device_list">
             <action
                 android:id="@+id/action_deviceListFragment_to_deviceMenuFragment"
@@ -106,7 +104,11 @@
             android:id="@+id/repairHistoryFragment"
             android:name="com.cms.cms_logbook.RepairHistoryListFragment"
             android:label="Repair history"
-            tools:layout="@layout/fragment_repair_history_list" />
+            tools:layout="@layout/fragment_repair_history_list" >
+            <action
+                android:id="@+id/action_repairHistoryFragment_to_repairHistoryDetailsFragment"
+                app:destination="@id/repairHistoryDetailsFragment" />
+        </fragment>
         <fragment
             android:id="@+id/startFragment"
             android:name="com.cms.cms_logbook.StartFragment"
@@ -135,18 +137,6 @@
                 app:popExitAnim="@anim/pop_exit_anim" />
 
         </fragment>
-        <fragment
-            android:id="@+id/remarksFragment"
-            android:name="com.cms.cms_logbook.RemarksFragment"
-            android:label="Device remarks"
-            tools:layout="@layout/fragment_remarks">
-            <argument
-                android:name="deviceId"
-                app:argType="string" />
-            <argument
-                android:name="deviceName"
-                app:argType="string" />
-        </fragment>
         <activity
             android:id="@+id/cameraActivity"
             android:name="com.cms.cms_logbook.CameraActivity"
@@ -171,9 +161,63 @@
                 android:name="deviceId"
                 app:argType="string" />
         </fragment>
-        <action
-            android:id="@+id/action_global_nav_settings_graph"
-            app:destination="@id/nav_settings_graph" />
-    </navigation>
-    <include app:graph="@navigation/nav_settings_graph" />
+        <fragment
+            android:id="@+id/remarksListFragment"
+            android:name="com.cms.cms_logbook.RemarksListFragment"
+            android:label="Remarks list"
+            tools:layout="@layout/fragment_remarks_list" >
+            <action
+                android:id="@+id/action_remarksListFragment_to_remarksFragment"
+                app:destination="@id/remarksFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/remarksFragment"
+            android:name="com.cms.cms_logbook.RemarksFragment"
+            android:label="Remark"
+            tools:layout="@layout/fragment_remarks" >
+            <argument
+                android:name="remarkText"
+                app:argType="string" />
+            <argument
+                android:name="remarkDate"
+                app:argType="string" />
+            <argument
+                android:name="deviceId"
+                app:argType="string" />
+        </fragment>
+        <fragment
+            android:id="@+id/workParametersDetailsFragment"
+            android:name="com.cms.cms_logbook.WorkParametersDetailsFragment"
+            android:label="fragment_work_parameters_details"
+            tools:layout="@layout/fragment_work_parameters_details" >
+            <argument
+                android:name="parameter"
+                app:argType="string" />
+            <argument android:name="position"
+                app:argType="integer" />
+            <argument
+                android:name="deviceId"
+                app:argType="string" />
+        </fragment>
+    <fragment
+        android:id="@+id/repairHistoryDetailsFragment"
+        android:name="com.cms.cms_logbook.RepairHistoryDetailsFragment"
+        android:label="fragment_repair_history_details"
+        tools:layout="@layout/fragment_repair_history_details" >
+        <argument
+            android:name="deviceMaintananceRhs"
+            app:argType="integer" />
+        <argument
+            android:name="deviceMaintananceComment"
+            app:argType="string" />
+        <argument
+            android:name="ifOverhaul"
+            app:argType="boolean" />
+        <argument
+            android:name="deviceId"
+            app:argType="string" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
 </navigation>
