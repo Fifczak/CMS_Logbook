@@ -1,5 +1,6 @@
 package com.cms.cms_logbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,9 @@ public class RemarksListFragment extends Fragment {
         if (getArguments() != null) {
             mdeviceId = getArguments().getString(deviceId);
         }
+
     }
+
 
     @Override
     public View onCreateView(

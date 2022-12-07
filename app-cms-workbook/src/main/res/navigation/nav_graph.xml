@@ -140,7 +140,7 @@
         <activity
             android:id="@+id/cameraActivity"
             android:name="com.cms.cms_logbook.CameraActivity"
-            android:label="fragment_qr_scanner"
+            android:label="QR Scanner"
             tools:layout="@layout/activiti_camera" />
         <fragment
             android:id="@+id/noteDetailsFragment"
@@ -188,7 +188,7 @@
         <fragment
             android:id="@+id/workParametersDetailsFragment"
             android:name="com.cms.cms_logbook.WorkParametersDetailsFragment"
-            android:label="fragment_work_parameters_details"
+            android:label="Work Parameters Details"
             tools:layout="@layout/fragment_work_parameters_details" >
             <argument
                 android:name="parameter"
@@ -202,7 +202,7 @@
     <fragment
         android:id="@+id/repairHistoryDetailsFragment"
         android:name="com.cms.cms_logbook.RepairHistoryDetailsFragment"
-        android:label="fragment_repair_history_details"
+        android:label="Repair History Details"
         tools:layout="@layout/fragment_repair_history_details" >
         <argument
             android:name="deviceMaintananceRhs"
