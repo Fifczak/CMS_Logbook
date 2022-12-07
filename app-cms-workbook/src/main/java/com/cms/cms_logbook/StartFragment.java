@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Objects;
 import android.provider.Settings.Secure;
+import android.widget.TextView;
 
 public class StartFragment extends Fragment {
 
@@ -80,10 +82,18 @@ public class StartFragment extends Fragment {
                 } else if (access == 1) {
                     String no_access = "No valid token. Please contact with office@cm-solution.tech";
                     Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    final View snackView = mySnackbar.getView();
+                    final TextView tv = (TextView) snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                    mySnackbar.setDuration(4000);
                     mySnackbar.show();
                 }  else {
                     String no_access = "The token has expired. Please contact with office@cm-solution.tech";
                     Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    final View snackView = mySnackbar.getView();
+                    final TextView tv = (TextView) snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                    mySnackbar.setDuration(4000);
                     mySnackbar.show();
                 }
             }
@@ -101,10 +111,18 @@ public class StartFragment extends Fragment {
                 } else if (access == 1) {
                     String no_access = "No valid token. Please contact with office@cm-solution.tech";
                     Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    final View snackView = mySnackbar.getView();
+                    final TextView tv = (TextView) snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                    mySnackbar.setDuration(4000);
                     mySnackbar.show();
                 } else {
                     String no_access = "The token has expired. Please contact with office@cm-solution.tech";
                     Snackbar mySnackbar = Snackbar.make(view, no_access, Snackbar.LENGTH_LONG);
+                    final View snackView = mySnackbar.getView();
+                    final TextView tv = (TextView) snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                    mySnackbar.setDuration(4000);
                     mySnackbar.show();
                 }
             }
