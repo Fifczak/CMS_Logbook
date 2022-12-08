@@ -3,18 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.cms.cms_logbook.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_sync"
-        android:orderInCategory="100"
-        android:title="@string/action_sync"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_close_app"
-        android:orderInCategory="100"
-        android:title="@string/action_close_app"
-        app:showAsAction="never" />
+        android:title="Options"
+        app:showAsAction="always">
+        <menu xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+            <item
+                android:id="@+id/action_settings"
+                android:orderInCategory="100"
+                android:title="@string/action_settings"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_sync"
+                android:orderInCategory="100"
+                android:title="@string/action_sync"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_close_app"
+                android:orderInCategory="100"
+                android:title="@string/action_close_app"
+                app:showAsAction="never" />
+        </menu>
+    </item>
 </menu>

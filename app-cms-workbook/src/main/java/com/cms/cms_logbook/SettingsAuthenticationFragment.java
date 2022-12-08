@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -70,6 +72,10 @@ public class SettingsAuthenticationFragment extends Fragment {
                     if (error.toString().contains("AuthFailureError")){
                         String no_access = "Authorization failed. Please check auth token.";
                         Snackbar mySnackbar = Snackbar.make(v, no_access, Snackbar.LENGTH_LONG);
+                        final View view = mySnackbar.getView();
+                        final TextView tv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+                        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                        mySnackbar.setDuration(4000);
                         mySnackbar.show();
                     }
                 }
@@ -132,6 +138,10 @@ public class SettingsAuthenticationFragment extends Fragment {
                 }else{
                     Snackbar mySnackbar = Snackbar.make(view,
                             "Bad token. Try again or contact: office@cm-solution.tech", Snackbar.LENGTH_LONG);
+                    final View view = mySnackbar.getView();
+                    final TextView tv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                    mySnackbar.setDuration(4000);
                     mySnackbar.show();
                 }
 

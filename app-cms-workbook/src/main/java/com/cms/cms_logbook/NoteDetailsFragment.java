@@ -2,9 +2,14 @@ package com.cms.cms_logbook;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.PointF;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
@@ -15,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ZoomControls;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -46,8 +52,16 @@ public class NoteDetailsFragment extends Fragment {
     public Button UpdateButton;
     public Button DeleteButton;
     public ImageButton AddPhotoButton;
+    public ZoomControls Zoom;
     public EditText GetValue;
     public ImageView PhotoImage;
+
+    public int zoom_counter = 0;
+
+    private static final String ACTION_SPEECH_EVENT =
+            "com.realwear.wearhf.intent.action.SPEECH_EVENT";
+
+    private static final String EXTRA_RESULT = "command";
 
     private static final int REQUEST_CODE = 105;
 
@@ -92,9 +106,14 @@ public class NoteDetailsFragment extends Fragment {
         AddPhotoButton = (ImageButton) view.findViewById(R.id.addPhotoButton);
         PhotoImage = (ImageView) view.findViewById(R.id.camera_image_view);
 
+        Zoom = (ZoomControls) view.findViewById(R.id.zoomControls1);
         GetValue.setText(note_text);
         Bitmap PhotoBitMap = StringToBitMap(note_img);
         PhotoImage.setImageBitmap(PhotoBitMap);
+
+        if(zoom_counter == 0){
+            Zoom.setIsZoomOutEnabled(false);
+        }
 
         AddPhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,11 +139,48 @@ public class NoteDetailsFragment extends Fragment {
                 NavHostFragment.findNavController(NoteDetailsFragment.this).popBackStack();
             }
         });
+
         DeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DeviceModel deviceScanned = deleteNoteToDeviceFromQR(mdeviceId, note_position);
                 NavHostFragment.findNavController(NoteDetailsFragment.this).popBackStack();
+            }
+        });
+
+        Zoom.setOnZoomInClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float x = PhotoImage.getScaleX();
+                float y = PhotoImage.getScaleY();
+
+                PhotoImage.setScaleX((float) (x+1));
+                PhotoImage.setScaleY((float) (y+1));
+                zoom_counter += 1;
+                if(zoom_counter != 0){
+                    Zoom.setIsZoomOutEnabled(true);
+                }
+                if(zoom_counter == 3){
+                    Zoom.setIsZoomInEnabled(false);
+                }
+            }
+        });
+
+        Zoom.setOnZoomOutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float x = PhotoImage.getScaleX();
+                float y = PhotoImage.getScaleY();
+
+                PhotoImage.setScaleX((float) (x-1));
+                PhotoImage.setScaleY((float) (y-1));
+                zoom_counter -= 1;
+                if(zoom_counter == 0){
+                    Zoom.setIsZoomOutEnabled(false);
+                }
+                if(zoom_counter != 3){
+                    Zoom.setIsZoomInEnabled(true);
+                }
             }
         });
 
@@ -207,6 +263,59 @@ public class NoteDetailsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(asrBroadcastReceiver, new IntentFilter(ACTION_SPEECH_EVENT));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (asrBroadcastReceiver != null) {
+            getActivity().unregisterReceiver(asrBroadcastReceiver);
+        }
+    }
+
+    private BroadcastReceiver asrBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (action.equals(ACTION_SPEECH_EVENT)) {
+                String asrCommand = intent.getStringExtra(EXTRA_RESULT);
+                System.out.println(asrCommand);
+                if (asrCommand.equals("Zoom In")){
+                    float x = PhotoImage.getScaleX();
+                    float y = PhotoImage.getScaleY();
+
+                    PhotoImage.setScaleX((float) (x+1));
+                    PhotoImage.setScaleY((float) (y+1));
+                    zoom_counter += 1;
+                    if(zoom_counter != 0){
+                        Zoom.setIsZoomOutEnabled(true);
+                    }
+                    if(zoom_counter == 3){
+                        Zoom.setIsZoomInEnabled(false);
+                    }
+                }
+                if (asrCommand.equals("Zoom Out")){
+                    float x = PhotoImage.getScaleX();
+                    float y = PhotoImage.getScaleY();
+
+                    PhotoImage.setScaleX((float) (x-1));
+                    PhotoImage.setScaleY((float) (y-1));
+                    zoom_counter -= 1;
+                    if(zoom_counter == 0){
+                        Zoom.setIsZoomOutEnabled(false);
+                    }
+                    if(zoom_counter != 3){
+                        Zoom.setIsZoomInEnabled(true);
+                    }
+                }
+
+            }
+        }
+    };
 
     /**
      * @param encodedString

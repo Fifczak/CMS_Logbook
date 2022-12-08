@@ -3,11 +3,13 @@ package com.cms.cms_logbook;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -113,6 +115,10 @@ public class SettingsAuthorizationFragment extends Fragment {
 
                 Snackbar mySnackbar = Snackbar.make(view,
                         "Token saved", Snackbar.LENGTH_LONG);
+                final View snackView = mySnackbar.getView();
+                final TextView tv = (TextView) snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                mySnackbar.setDuration(4000);
                 mySnackbar.show();
                 tokenHandler.saveAuthTokenFile(tokenText, path);
 

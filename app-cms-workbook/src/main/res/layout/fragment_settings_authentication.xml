@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SettingsAuthenticationFragment">
 
-    <Button
-        android:id="@+id/checkTokenButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/gradient_background"
-        android:text="@string/check_token"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tokenInput" />
-
     <TextView
         android:id="@+id/textview_first"
         android:layout_width="0dp"
@@ -29,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <EditText
         android:id="@+id/tokenInput"
@@ -43,7 +32,8 @@
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_first" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_first"
+        android:contentDescription="hf_overlay_offset:720,80|hf_show_text|hf_persists|hf_use_description|Enter Token"/>
 
 
     <Button
@@ -57,6 +47,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkTokenButton" />
+        app:layout_constraintTop_toBottomOf="@+id/tokenInput" />
+
+    <Button
+        android:id="@+id/checkTokenButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/gradient_background"
+        android:text="@string/check_token"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getTokenButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

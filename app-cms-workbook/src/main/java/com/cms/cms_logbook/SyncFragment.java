@@ -7,11 +7,13 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.io.FileReader;
 
@@ -144,6 +146,10 @@ public class SyncFragment extends Fragment {
                 (Response.ErrorListener) error -> {
                     String no_access = "Authorization failed. Please check auth token.";
                     Snackbar mySnackbar = Snackbar.make(v, no_access, Snackbar.LENGTH_LONG);
+                    final View snackView = mySnackbar.getView();
+                    final TextView tv = (TextView) snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                    mySnackbar.setDuration(4000);
                     mySnackbar.show();
                 }
         ){
@@ -196,6 +202,10 @@ public class SyncFragment extends Fragment {
                     if (error.toString().contains("AuthFailureError")){
                         String no_access = "Authorization failed. Please check auth token.";
                         Snackbar mySnackbar = Snackbar.make(v, no_access, Snackbar.LENGTH_LONG);
+                        final View snackView = mySnackbar.getView();
+                        final TextView tv = (TextView) snackView.findViewById(com.google.android.material.R.id.snackbar_text);
+                        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                        mySnackbar.setDuration(4000);
                         mySnackbar.show();
                     }
                 }
