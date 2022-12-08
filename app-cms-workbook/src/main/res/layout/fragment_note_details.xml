@@ -6,6 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".NoteDetailsFragment">
 
+
+
+    <ImageView
+        android:id="@+id/camera_image_view"
+        android:layout_width="500dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/camera"
+        app:layout_constraintBottom_toTopOf="@+id/zoomControls1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText1"
+        android:translationZ="2dp"
+        android:elevation="10dp"/>
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Enter note"
+        android:contentDescription="hf_overlay_offset:620,5|hf_show_text|hf_persists|hf_use_description|Enter note"
+        app:layout_constraintEnd_toStartOf="@+id/addPhotoButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/addPhotoButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:src="@android:drawable/ic_menu_camera"
+        android:background="@drawable/gradient_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="hf_overlay_offset:-38,-28|hf_show_text|hf_persists|hf_use_description|Change Photo"/>
+
     <Button
         android:id="@+id/updateNoteButton"
         android:layout_width="0dp"
@@ -20,7 +65,8 @@
         app:layout_constraintBottom_toTopOf="@+id/deleteNoteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:translationZ="1dp"/>
 
     <Button
         android:id="@+id/deleteNoteButton"
@@ -36,47 +82,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:translationZ="1dp"/>
 
-
-    <ImageView
-        android:id="@+id/camera_image_view"
-        android:layout_width="500dp"
-        android:layout_height="0dp"
-        android:layout_alignParentTop="true"
+    <ZoomControls
+        android:id="@+id/zoomControls1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/camera"
         app:layout_constraintBottom_toTopOf="@+id/updateNoteButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText1" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Enter note"
-        android:contentDescription="hf_show_text|hf_persists|hf_use_description|Enter note"
-        app:layout_constraintEnd_toStartOf="@+id/addPhotoButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/addPhotoButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:src="@android:drawable/ic_menu_camera"
-        android:background="@drawable/gradient_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_image_view"
+        android:translationZ="3dp"
+        android:contentDescription="hf_add_commands:Zoom In|Zoom Out"
+        android:elevation="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

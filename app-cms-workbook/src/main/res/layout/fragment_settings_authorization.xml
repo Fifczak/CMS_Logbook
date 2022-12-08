@@ -32,7 +32,8 @@
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_second" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_second"
+        android:contentDescription="hf_overlay_offset:720,5|hf_show_text|hf_persists|hf_use_description|Enter Token"/>
 
     <Button
         android:id="@+id/getAuthTokenButton"
