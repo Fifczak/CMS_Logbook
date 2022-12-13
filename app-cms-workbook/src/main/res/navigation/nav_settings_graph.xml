@@ -28,11 +28,11 @@
     <fragment
         android:id="@+id/settingsAuthenticationFragment"
         android:name="com.cms.cms_logbook.SettingsAuthenticationFragment"
-        android:label="Authentication"
+        android:label="APP ACTIVATION"
         tools:layout="@layout/fragment_settings_authentication" />
     <fragment
         android:id="@+id/settingsAuthorizationFragment"
         android:name="com.cms.cms_logbook.SettingsAuthorizationFragment"
-        android:label="Authorization"
+        android:label="API AUTHORIZATION"
         tools:layout="@layout/fragment_settings_authorization" />
 </navigation>

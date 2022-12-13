@@ -31,6 +31,6 @@
     <string name="camera_button_file_provider_video">File Provider Video</string>
     <string name="take_picture">Take Picture</string>
 
-    <string name="authorization">Authorization</string>
-    <string name="authentication">Authentication</string>
+    <string name="authorization">API AUTHORIZATION</string>
+    <string name="authentication">APP ACTIVATION</string>
 </resources>

@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +70,8 @@ public class StartFragment extends Fragment {
         TokenHandler tokenHandler = new TokenHandler();
         File basePath = getContext().getExternalFilesDir("CMSData");
         String activationToken = tokenHandler.readActivationTokenFromFile(basePath);
+        System.out.println("TTTT");
+        System.out.println(Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID));
 
         ContentResolver context = getContext().getContentResolver();
         access = tokenHandler.checkActivationToken(activationToken, context);
