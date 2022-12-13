@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,7 +133,6 @@ public class SyncFragment extends Fragment {
 
         RequestQueue volleyQueue = Volley.newRequestQueue(this.getContext());
         String url = "https://api.info-marine.com/api/sync/qrdata/" + authToken;
-        JSONArray devices_list = null;
         List<JSONArray> reponse_l = new ArrayList<>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -144,6 +144,12 @@ public class SyncFragment extends Fragment {
                     } finally{}
                 },
                 (Response.ErrorListener) error -> {
+                    binding.loadGif.setVisibility(View.INVISIBLE);
+                    binding.uploadDataButton.setEnabled(true);
+                    binding.downloadStructureButton.setEnabled(true);
+                    binding.downloadManualsButton.setEnabled(true);
+                    Log.e("sync error", error.toString());
+
                     String no_access = "Authorization failed. Please check auth token.";
                     Snackbar mySnackbar = Snackbar.make(v, no_access, Snackbar.LENGTH_LONG);
                     final View snackView = mySnackbar.getView();
@@ -200,6 +206,7 @@ public class SyncFragment extends Fragment {
                 },
                 (Response.ErrorListener) error -> {
                     if (error.toString().contains("AuthFailureError")){
+                        Log.e("sync error", error.toString());
                         String no_access = "Authorization failed. Please check auth token.";
                         Snackbar mySnackbar = Snackbar.make(v, no_access, Snackbar.LENGTH_LONG);
                         final View snackView = mySnackbar.getView();
@@ -238,9 +245,7 @@ public class SyncFragment extends Fragment {
             }
             //do the stuff
         }
-
-        Toast.makeText(getActivity(), "Download Complete",
-                Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Download Complete", Toast.LENGTH_LONG).show();
 
     }
 
@@ -282,7 +287,7 @@ public class SyncFragment extends Fragment {
                 HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
                 urlc.setRequestProperty("User-Agent", "Test");
                 urlc.setRequestProperty("Connection", "close");
-                urlc.setConnectTimeout(1500);
+                urlc.setConnectTimeout(2000);
                 urlc.connect();
                 return (urlc.getResponseCode() == 200);
             } catch (IOException e) {
