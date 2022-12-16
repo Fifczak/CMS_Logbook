@@ -37,6 +37,7 @@ public class SettingsAuthenticationFragment extends Fragment {
     private FragmentSettingsAuthenticationBinding binding;
     private Button checkTokenButton;
     private Button getTokenButton;
+    private Button getAndriudIDButton;
     private EditText tokenInput;
 
     private void sendTokenRequest(EditText tokenInput,View v) {
@@ -111,6 +112,7 @@ public class SettingsAuthenticationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         checkTokenButton = (Button) view.findViewById(R.id.checkTokenButton);
         getTokenButton = (Button) view.findViewById(R.id.getTokenButton);
+        getAndriudIDButton = (Button) view.findViewById(R.id.getAnroidId);
         tokenInput = (EditText) view.findViewById(R.id.tokenInput);
 
 
@@ -133,6 +135,10 @@ public class SettingsAuthenticationFragment extends Fragment {
                 if (tokenValid == 0) {
                     Snackbar mySnackbar = Snackbar.make(view,
                             "Token active", Snackbar.LENGTH_LONG);
+                    final View view = mySnackbar.getView();
+                    final TextView tv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                    mySnackbar.setDuration(4000);
                     mySnackbar.show();
                     tokenHandler.saveActivationTokenFile(tokenText, path);
                 }else{
@@ -155,6 +161,20 @@ public class SettingsAuthenticationFragment extends Fragment {
                  sendTokenRequest(tokenInput, v);
             }
         });
+
+        getAndriudIDButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar mySnackbar = Snackbar.make(view,
+                        "Android ID: " + Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID), Snackbar.LENGTH_LONG);
+                final View view = mySnackbar.getView();
+                final TextView tv = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.snackbar_textsize));
+                mySnackbar.setDuration(4000);
+                mySnackbar.show();
+            }
+        });
+
 
     }
 

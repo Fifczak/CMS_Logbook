@@ -61,4 +61,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getTokenButton" />
 
+    <Button
+        android:id="@+id/getAnroidId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/gradient_background"
+        android:text="@string/check_android_id"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkTokenButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
